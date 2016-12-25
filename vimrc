@@ -17,16 +17,17 @@ Plugin 'taglist.vim'
 Plugin 'winmanager'
 Plugin 'minibufexpl.vim'
 Plugin 'a.vim'
+Plugin 'The-NERD-Commenter'
 
 " original repos on github
 Plugin 'scrooloose/nerdtree'
 Plugin 'mhinz/vim-startify'
 Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'acusp/AuthorInfo'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-
 
 " ==========================
 " 2. formate control
@@ -60,43 +61,14 @@ set guifont=DejaVu_Sans_Mono:h12
 end
 
 " ==========================
-" 3. add copyright info
+" 3. authorinfo
 " ==========================
 
-map <F4> :call TitleDet()<cr>
-function AddTitle()
-    call append(0,"/*")
-    call append(1," * File Name : ".expand("%:t"))
-    call append(2," * Author: Xu Shipeng")
-    call append(3," * Email: xushipeng@antiy.cn")
-call append(4," * Created Time: ".strftime("%c"))
-    call append(5," */")
-    echohl WarningMsg | echo "Successful in adding copyright." | echohl None
-endf
+let g:vimrc_author='acusp'
+let g:vimrc_email='acusp.xu@gmail.com'
+let g:vimrc_homepage='acusp.info'
 
-function UpdateTitle()
-     normal m'
-     execute '/ * Created Time:/s@:.*$@\=": ".strftime("%c")@'
-     normal ''
-     normal mk
-     execute '/ * File Name/s@:.*$@\=": ".expand("%:t")@'
-     execute "noh"
-     normal 'k
-     echohl WarningMsg | echo "Successful in updating the copyright." | echohl None
-endfunction
-
-function TitleDet()
-    let n=1
-    while n < 6
-        let line = getline(n)
-        if line =~ '^\s*\*\s*\S*Created\sTime\S*.*$'
-            call UpdateTitle()
-            return
-        endif
-        let n = n + 1
-    endwhile
-    call AddTitle()
-endfunction
+nmap <F4> :AuthorInfoDetect<cr>
 
 " ==========================
 " 4. plugin config
