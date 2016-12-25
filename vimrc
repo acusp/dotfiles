@@ -30,7 +30,7 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 " ==========================
-" 2. formate control
+" 2. format control
 " ==========================
 
 set tabstop=4
