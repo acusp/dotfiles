@@ -1,29 +1,35 @@
 #!/bin/bash
 
 os=$(uname)
-backup=$HOME/backup/dotfiles
+
+do_backup() {
+    backup=$HOME/backup/dotfiles
+    if [ -e "$HOME/$1" ]; then
+        now=`date +%Y%m%d_%s`
+        [ ! -L "$HOME/$1" ] && cp -fpR "$HOME/$1" "$backup/$1.$now";
+    fi
+}
 
 # backup & link dot files
 baclin() {
     echo "1. Backup and Link..."
-    mkdir -p $HOME/backup/dotfiles
-    mv $HOME/.vimrc $backup
-    mv $HOME/.zshrc $backup
-    mv $HOME/.gitconfig $backup
-    ln -sf $(pwd)/vimrc $HOME/.vimrc
+    do_backup .vimrc
+    do_backup .zshrc
+    do_backup .gitconfig
+    ln -sf $(pwd)/files/vimrc $HOME/.vimrc
+    ln -sf $(pwd)/files/gitconfig $HOME/.gitconfig
     if [ $os == 'linux' ];then
-        ln -sf $(pwd)/zshrc_linux $HOME/.zshrc
+        ln -sf $(pwd)/files/zshrc_linux $HOME/.zshrc
     elif [ $os == 'Darwin' ];then
-        ln -sf $(pwd)/zshrc_mac $HOME/.zshrc
+        ln -sf $(pwd)/files/zshrc_mac $HOME/.zshrc
     fi
-    ln -sf $(pwd)/gitconfig $HOME/.gitconfig
 }
 
 # install tools
 install() {
     if [ $os == 'linux' ];then
         echo "2. install requirements..."
-        sudo apt-get install -y git wget curl
+        sudo apt-get install -y git wget curl build-essential cmake python-dev python3-dev
         sudo apt-get install -y proxychains
         sudo add-apt-repository -y ppa:hzwhuang/ss-qt5
         sudo apt-get update
@@ -44,10 +50,12 @@ install() {
         git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
         # autojump
         sudo apt-get install -y autojump
+
     elif [ $os == 'Darwin' ];then
         echo "2. install requirements..."
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-        brew install git wget proxychains-ng
+        brew install git wget proxychains-ng cmake
+        wget -c https://github.com/shadowsocks/shadowsocks-iOS/releases/download/2.6.3/ShadowsocksX-2.6.3.dmg
 
         echo "3. install some tools about vim..."
         # Vundle

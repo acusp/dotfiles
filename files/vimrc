@@ -1,6 +1,6 @@
-" ==========================
+" ------------------------------------------------------------
 " 1. oh_my_zsh
-" ==========================
+" ------------------------------------------------------------
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -24,14 +24,15 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'mhinz/vim-startify'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'acusp/AuthorInfo'
+Plugin 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-" ==========================
+" ------------------------------------------------------------
 " 2. format control
-" ==========================
+" ------------------------------------------------------------
 
 set tabstop=4
 set softtabstop=4
@@ -60,9 +61,9 @@ elseif has("gui_win32")
 set guifont=DejaVu_Sans_Mono:h12
 end
 
-" ==========================
+" ------------------------------------------------------------
 " 3. authorinfo
-" ==========================
+" ------------------------------------------------------------
 
 let g:vimrc_author='acusp'
 let g:vimrc_email='acusp.xu@gmail.com'
@@ -70,9 +71,9 @@ let g:vimrc_homepage='acusp.info'
 
 nmap <F4> :AuthorInfoDetect<cr>
 
-" ==========================
+" ------------------------------------------------------------
 " 4. plugin config
-" ==========================
+" ------------------------------------------------------------
 
 " ctags
 set tags=tags;
@@ -106,3 +107,13 @@ map <F9> :NERDTreeToggle<CR>
 
 " A
 nnoremap <silent> <F12> :A<CR>
+
+" YouCompleteMe
+let g:ycm_confirm_extra_conf=0  " close prompt of loading .ycm_extra_conf.py
+let g:ycm_min_num_of_chars_for_completion=2
+" let g:ycm_cache_omnifunc=0
+let g:ycm_seed_identifiers_with_syntax=1
+let g:ycm_complete_in_comments = 1
+let g:ycm_complete_in_strings = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
