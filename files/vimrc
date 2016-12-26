@@ -15,7 +15,7 @@ Plugin 'VundleVim/Vundle.vim'
 " vim-scripts repos
 Plugin 'taglist.vim'
 Plugin 'winmanager'
-Plugin 'minibufexpl.vim'
+"Plugin 'minibufexpl.vim'
 Plugin 'a.vim'
 Plugin 'The-NERD-Commenter'
 
@@ -25,10 +25,13 @@ Plugin 'mhinz/vim-startify'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'acusp/AuthorInfo'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
 
 " ------------------------------------------------------------
 " 2. format control
@@ -46,20 +49,29 @@ set backupdir=~/backup
 set scrolloff=3
 syntax on
 
+
 " themes
+"
 colo desert
 
-" file encoding
-"set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
 
-" font
-if has("gui_gtk2")
-set guifont=DejaVu\ Sans\ Mono\ 12
+" file encoding
+"
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,utf-16,gbk,big5,gb18030,latin1
+set fileencoding=utf-8
+
+
+" gui font
+"
+if has("unix")
+    set guifont=DejaVu\ Sans\ Mono\ 12
+elseif has("win32") || has("win64")
+    set guifont=DejaVu_Sans_Mono:h12
 elseif has("gui_macvim")
-set guifont=DejaVu_Sans_Mono:h12
-elseif has("gui_win32")
-set guifont=DejaVu_Sans_Mono:h12
+    set guifont=DejaVu_Sans_Mono:h12
 end
+
 
 " ------------------------------------------------------------
 " 3. authorinfo
@@ -71,15 +83,19 @@ let g:vimrc_homepage='acusp.info'
 
 nmap <F4> :AuthorInfoDetect<cr>
 
+
 " ------------------------------------------------------------
 " 4. plugin config
 " ------------------------------------------------------------
 
-" ctags
+" [ ctags ]
+"
 set tags=tags;
 set autochdir
 
-" cscope
+
+" [ cscope ]
+"
 if has("cscope")
     set csprg=/usr/bin/cscope
     set csto=0
@@ -99,21 +115,64 @@ if has("cscope")
     endif
 endif
 
-" TagList
+
+" [ TagList ]
+"
 nnoremap <silent> <F8> :TlistToggle<CR>
 
-" NERDTree
+
+" [ NERDTree ]
+"
 map <F9> :NERDTreeToggle<CR>
 
-" A
+
+" [ A ]
+"
 nnoremap <silent> <F12> :A<CR>
 
-" YouCompleteMe
+
+" [ YouCompleteMe ]
+"
 let g:ycm_confirm_extra_conf=0  " close prompt of loading .ycm_extra_conf.py
 let g:ycm_min_num_of_chars_for_completion=2
-" let g:ycm_cache_omnifunc=0
+let g:ycm_cache_omnifunc=0
 let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
+
+
+" [ vim-airline ]
+"
+let g:airline_theme="luna"
+let g:airline_powerline_fonts = 1
+"
+" tabline
+"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+"
+" whitespace
+"
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#symbol = '!'
+"
+" switch buffer
+nnoremap <C-n> :bn<CR>
+nnoremap <C-p> :bp<CR>
+"
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+"
+" old vim-powerline symbols
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
