@@ -44,8 +44,7 @@ vim() {
     git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
     # Powerlin fonts
     git clone https://github.com/powerline/fonts.git $HOME/.vim/fonts
-    cd $HOME/.vim/fonts
-    ./install.sh
+    $HOME/.vim/fonts/install.sh
 
     if [ $os == 'Linux' ];then
         # ctags

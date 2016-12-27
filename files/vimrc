@@ -37,6 +37,7 @@ filetype plugin indent on    " required
 " 2. format control
 " ------------------------------------------------------------
 
+syntax on
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -47,7 +48,9 @@ set backup
 set backupext=.bak
 set backupdir=~/backup
 set scrolloff=3
-syntax on
+set laststatus=2
+set hls
+"set foldmethod=syntax
 
 
 " themes
@@ -65,7 +68,7 @@ set fileencoding=utf-8
 " gui font
 "
 if has("unix")
-    set guifont=DejaVu\ Sans\ Mono\ 12
+    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 12
 elseif has("win32") || has("win64")
     set guifont=DejaVu_Sans_Mono:h12
 elseif has("gui_macvim")
@@ -133,7 +136,8 @@ nnoremap <silent> <F12> :A<CR>
 
 " [ YouCompleteMe ]
 "
-let g:ycm_confirm_extra_conf=0  " close prompt of loading .ycm_extra_conf.py
+let g:ycm_global_ycm_extra_conf='/home/acusp/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf=0
 let g:ycm_min_num_of_chars_for_completion=2
 let g:ycm_cache_omnifunc=0
 let g:ycm_seed_identifiers_with_syntax=1
@@ -141,6 +145,12 @@ let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
+"
+let g:ycm_show_diagnostics_ui = 0
+"
+" \y - turn off YCM; \Y - turn on YCM
+nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>
+nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>
 
 
 " [ vim-airline ]
@@ -149,14 +159,10 @@ let g:airline_theme="luna"
 let g:airline_powerline_fonts = 1
 "
 " tabline
-"
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#buffer_nr_show = 0
 "
 " whitespace
-"
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#symbol = '!'
 "
@@ -168,11 +174,11 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 "
-" old vim-powerline symbols
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
-let g:airline_symbols.linenr = '⭡'
+" powerline symbols
+let g:airline_left_sep = ' '
+let g:airline_left_alt_sep = ' '
+let g:airline_right_sep = ' '
+let g:airline_right_alt_sep = ' '
+let g:airline_symbols.branch = ' '
+let g:airline_symbols.readonly = ' '
+let g:airline_symbols.linenr = ''
