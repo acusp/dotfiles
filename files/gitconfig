@@ -3,3 +3,5 @@
 	name = acusp
 [color]
 	ui = auto
+[push]
+	default = matching
