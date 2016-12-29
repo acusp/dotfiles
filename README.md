@@ -2,6 +2,7 @@
 
 ## Files Tree
 
+```
 ├── files
 │   │
 │   ├── gitconfig
@@ -19,6 +20,7 @@
 ├── install.sh
 │
 └── README.md
+```
 
 
 ## Usage
