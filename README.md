@@ -1,13 +1,21 @@
 > backup, restore and sync my dot files.
 
-## Files List
+## Files Tree
 
-* vimrc
-
-* zshrc
-
-* gitconfig
-
-* install.sh
+├── files
+│   ├── gitconfig
+│   ├── vimrc
+│   ├── zshrc_linux
+│   └── zshrc_mac
+├── scripts
+│   └── youcompleteme.sh
+├── install.sh
+└── README.md
 
 ## Usage
+
+cd to your work directory, and run commands as follow:
+```
+git clone git@github.com:acusp/dotfiles.git
+./install.sh
+```
