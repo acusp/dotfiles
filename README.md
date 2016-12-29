@@ -3,14 +3,23 @@
 ## Files Tree
 
 ├── files
-│   ├── gitconfig
+│   │
+│   ├── gitconfig
+│   │
 │   ├── vimrc
+│   │
 │   ├── zshrc_linux
+│   │
 │   └── zshrc_mac
+│
 ├── scripts
+│   │
 │   └── youcompleteme.sh
+│
 ├── install.sh
+│
 └── README.md
+
 
 ## Usage
 
