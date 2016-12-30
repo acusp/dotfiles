@@ -7,6 +7,8 @@
 │   │
 │   ├── gitconfig
 │   │
+│   ├── tmux.conf
+│   │
 │   ├── vimrc
 │   │
 │   ├── zshrc_linux
