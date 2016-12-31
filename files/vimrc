@@ -72,7 +72,7 @@ if has("unix")
 elseif has("win32") || has("win64")
     set guifont=DejaVu_Sans_Mono:h12
 elseif has("gui_macvim")
-    set guifont=DejaVu_Sans_Mono:h12
+    set guifont=DejaVu_Sans_Mono_for_Powerline:h12
 end
 
 

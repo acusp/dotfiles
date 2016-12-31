@@ -10,9 +10,35 @@ do_backup() {
     fi
 }
 
+isExist() {
+    if which $1 >/dev/null 2>&1;then
+        echo "# -> [+] $1 exist"
+        return 0
+    else
+        echo "# -> [-] $1 not exist"
+        return 1
+    fi
+
+}
+
+install() {
+    isExist $1
+    if [ "$?" -ne 0 ]; then
+        echo "# -> [+] install $1..."
+        if [ $os == 'Darwin' ];then
+            brew install $1
+        elif [ $os == 'Linux' ];then
+            if which apt-get >/dev/null; then
+                sudo apt-get install -y $1
+            else
+                echo "# -> [-] Sorry, please install $1 by yourself!"
+            fi
+        fi
+    fi
+}
+
 # backup & link dot files
 baclin() {
-    echo "1. Backup and Link..."
     do_backup .vimrc
     do_backup .zshrc
     do_backup .gitconfig
@@ -25,84 +51,123 @@ baclin() {
     elif [ $os == 'Darwin' ];then
         ln -sf $(pwd)/files/zshrc_mac $HOME/.zshrc
     fi
+
+	echo "# -> [+] Exit from backup & link"
+    echo "#"
 }
 
 requirement() {
     if [ $os == 'Darwin' ];then
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+		isExist brew
+	    if [ "$?" -ne 0 ]; then
+			echo "# -> [+] Downloading brew first ..."
+	    	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	    fi
         brew install git wget proxychains-ng cmake
-        wget -c https://github.com/shadowsocks/shadowsocks-iOS/releases/download/2.6.3/ShadowsocksX-2.6.3.dmg
+		echo "# -> [-] Please download shadowsocks client on https://github.com/shadowsocks/shadowsocks-iOS/releases/"
 
     elif [ $os == 'Linux' ];then
-        sudo apt-get remove -y vim-common
-        sudo add-apt-repository -y ppa:jonathonf/vim   # vim version 8
-        sudo add-apt-repository -y ppa:hzwhuang/ss-qt5
-        sudo apt update
-        sudo apt-get install -y vim vim-gnome git wget curl build-essential cmake python-dev python3-dev ppa-purge proxychains shadowsocks-qt5
+		if which apt-get >/dev/null; then
+        	sudo apt-get remove -y vim-common
+        	sudo add-apt-repository -y ppa:jonathonf/vim   # vim version 8
+        	sudo add-apt-repository -y ppa:hzwhuang/ss-qt5
+        	sudo apt update
+        	sudo apt-get install -y vim vim-gnome git wget curl build-essential cmake python-dev python3-dev ppa-purge proxychains shadowsocks-qt5
+		else
+			echo "# -> [-] Sorry, please install some packages by yourself!"
+		fi
     fi
+
+	echo "# -> [+] Exit from install requirement"
+    echo "#"
 }
 
 vim() {
     # Vundle
-    git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+	if [ ! -d $HOME/.vim/bundle ];then
+		echo "# -> [+] Downloading bundle..."
+    	git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+	fi
+
     # Powerlin fonts
-    git clone https://github.com/powerline/fonts.git $HOME/.vim/fonts
-    $HOME/.vim/fonts/install.sh
+	if [ ! -d $HOME/.vim/fonts ];then
+		echo "# -> [+] Downloading essential fonts..."
+    	git clone https://github.com/powerline/fonts.git $HOME/.vim/fonts
+    	$HOME/.vim/fonts/install.sh
+	fi
 
-    if [ $os == 'Darwin' ];then
-        # ctags
-        sudo brew install ctags
-        # cscope
-        sudo brew install cscope
+    # ctags
+    install ctags
+    # cscope
+    install cscope
 
-    elif [ $os == 'Linux' ];then
-        # ctags
-        sudo apt-get install -y ctags
-        # cscope
-        sudo apt-get install -y cscope
-    fi
+	echo "# -> [+] Exit from install vim"
+    echo "#"
 }
 
 zsh() {
     # oh-my-zsh
-    git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-
-    if [ $os == 'Darwin' ];then
-        # autojump
-        brew install autojump
-
-    elif [ $os == 'Linux' ];then
-        # zsh
-        sudo apt-get install -y zsh
-        # autojump
-        sudo apt-get install -y autojump
+	if [ ! -d $HOME/.oh-my-zsh ];then
+        echo "# -> [+] Downloading oh-my-zsh..."
+        git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
     fi
+
+    # zsh
+    install zsh
+
+    # autojump
+    install autojump
+
+	echo "# -> [+] Exit from install zsh"
+    echo "#"
 }
 
 tmux() {
-    if [ $os == 'Darwin' ];then
-        brew install tmux
 
-    elif [ $os == 'Linux' ];then
-        sudo apt-get install tmux
+    # tmux
+    install tmux
 
-    fi
+	echo "# -> [+] Exit from install tmux"
+    echo "#"
 }
 
-install() {
-    echo "2. install some requirements..."
-    requirement
-
-    echo "3. install some tools about vim..."
-    vim
-
-    echo "4. install some tools about zsh..."
-    zsh
-
-    echo "5. install some tools about Tmux..."
-    tmux
-}
 
 # main()
+
+echo "# --------------------------------------------------------"
+echo "# 1. Backup and Link"
+echo "# --------------------------------------------------------"
+echo "#"
+
 baclin
-install
+
+echo "# --------------------------------------------------------"
+echo "# 2. Install some requirements"
+echo "# --------------------------------------------------------"
+echo "#"
+
+requirement
+
+echo "# --------------------------------------------------------"
+echo "# 3. Install some tools about vim"
+echo "# --------------------------------------------------------"
+echo "#"
+
+vim
+
+echo "# --------------------------------------------------------"
+echo "# 4. Install some tools about zsh"
+echo "# --------------------------------------------------------"
+echo "#"
+
+zsh
+
+echo "# --------------------------------------------------------"
+echo "# 5. Install some tools about Tmux"
+echo "# --------------------------------------------------------"
+echo "#"
+
+tmux
+
+echo "# -> [+] Install finish !"
+echo "# --------------------------------------------------------"
