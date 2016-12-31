@@ -127,10 +127,6 @@ tmux() {
     # tmux
     install tmux
 
-    if [ $os == 'Darwin' ];then
-        echo "# -> [-] Please download MouseTerm from: https://bitheap.org/mouseterm/"
-    fi
-
 	echo "# -> [+] Exit from install tmux"
     echo "#"
 }
