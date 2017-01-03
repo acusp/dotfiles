@@ -22,7 +22,7 @@ required_packages() {
 
 repo() {
     mkdir $HOME/bin
-    echo 'PATH=$HOME/bin:$PATH' > $HOME/.bashrc
+    echo 'PATH=$HOME/bin:$PATH' >> $HOME/.bashrc
     curl https://storage.googleapis.com/git-repo-downloads/repo > $HOME/bin/repo
     chmod a+x $HOME/bin/repo
 

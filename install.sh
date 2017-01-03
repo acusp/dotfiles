@@ -4,6 +4,7 @@ os=$(uname)
 
 do_backup() {
     backup=$HOME/backup/dotfiles
+    mkdir -p $backup
     if [ -e "$HOME/$1" ]; then
         now=`date +%Y%m%d_%s`
         [ ! -L "$HOME/$1" ] && cp -fpR "$HOME/$1" "$backup/$1.$now";
