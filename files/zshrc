@@ -82,15 +82,13 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias .="source"
+alias .='source'
 alias c='clear'
 alias ll='ls -l'
 alias la='ls -a'
 alias vi='vim'
 alias javac="javac -J-Dfile.encoding=utf8"
 alias grep="grep --color=auto"
-alias gitps="git push origin HEAD:refs/for/master"
-alias gbs="gitbook serve ."
 
 alias -s c=vi
 alias -s java=vi
@@ -102,8 +100,3 @@ alias -s bz2='tar -xjvf'
 alias -s xz="xz -d"
 alias -s tar="tar -xvf"
 
-# PATH
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# android studio: adb, fastboot
-export PATH=$HOME/Android/Sdk/platform-tools:$PATH
