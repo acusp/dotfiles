@@ -100,3 +100,6 @@ alias -s bz2='tar -xjvf'
 alias -s xz="xz -d"
 alias -s tar="tar -xvf"
 
+# ----------------------------------------
+# # envionment variables
+# # ----------------------------------------
