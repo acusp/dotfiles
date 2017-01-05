@@ -4,7 +4,10 @@ os=$(uname)
 
 do_backup() {
     backup=$HOME/backup/dotfiles
-    mkdir -p $backup
+    if [ ! -d $backup ]; then
+        mkdir -p $backup
+    fi
+
     if [ -e "$HOME/$1" ]; then
         now=`date +%Y%m%d_%s`
         [ ! -L "$HOME/$1" ] && cp -fpR "$HOME/$1" "$backup/$1.$now";
@@ -39,19 +42,17 @@ install() {
 }
 
 # backup & link dot files
-baclin() {
+backup_copy() {
     do_backup .vimrc
     do_backup .zshrc
+    do_backup .bashrc
     do_backup .gitconfig
     do_backup .tmux.conf
-    ln -sf $(pwd)/files/vimrc $HOME/.vimrc
-    ln -sf $(pwd)/files/gitconfig $HOME/.gitconfig
-    ln -sf $(pwd)/files/tmux.conf $HOME/.tmux.conf
-    if [ $os == 'Linux' ];then
-        ln -sf $(pwd)/files/zshrc_linux $HOME/.zshrc
-    elif [ $os == 'Darwin' ];then
-        ln -sf $(pwd)/files/zshrc_mac $HOME/.zshrc
-    fi
+    cp $(pwd)/files/vimrc $HOME/.vimrc
+    cp $(pwd)/files/zshrc $HOME/.zshrc
+    cp $(pwd)/files/bashrc $HOME/.bashrc
+    cp $(pwd)/files/gitconfig $HOME/.gitconfig
+    cp $(pwd)/files/tmux.conf $HOME/.tmux.conf
 
 	echo "# -> [+] Exit from backup & link"
     echo "#"
@@ -124,7 +125,6 @@ zsh() {
 }
 
 tmux() {
-
     # tmux
     install tmux
 
@@ -132,6 +132,22 @@ tmux() {
     echo "#"
 }
 
+setEnv() {
+    if [ ! -d $HOME/bin ]; then
+        mkdir $HOME/bin
+    fi
+
+    if [ $os == 'Linux' ];then
+        cat $(pwd)/files/env_for_linux >> $HOME/.zshrc
+        cat $(pwd)/files/env_for_linux >> $HOME/.bashrc
+    elif [ $os == 'Darwin' ];then
+        cat $(pwd)/files/env_for_mac >> $HOME/.zshrc
+        cat $(pwd)/files/env_for_mac >> $HOME/.bashrc
+    fi
+
+    echo "# -> [+] Exit from setEnv"
+    echo "#"
+}
 
 # main()
 
@@ -140,7 +156,7 @@ echo "# 1. Backup and Link"
 echo "# --------------------------------------------------------"
 echo "#"
 
-baclin
+backup_copy
 
 echo "# --------------------------------------------------------"
 echo "# 2. Install some requirements"
@@ -169,6 +185,13 @@ echo "# --------------------------------------------------------"
 echo "#"
 
 tmux
+
+echo "# --------------------------------------------------------"
+echo "# 6. Set some environment variables"
+echo "# --------------------------------------------------------"
+echo "#"
+
+setEnv
 
 echo "# -> [+] Install finish !"
 echo "# --------------------------------------------------------"
