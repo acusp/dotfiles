@@ -3,7 +3,11 @@
 # ----------------------------------------
 alias c="clear"
 alias l="ls -l"
-alias ls="ls -G"
+if [ $(uname) == "Linux" ]; then
+    alias ls="ls --color=auto"
+elif
+    alias ls="ls -G"
+fi
 alias ll="ls -l"
 alias la="ls -a"
 alias .='source'
