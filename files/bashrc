@@ -1,13 +1,14 @@
 # ----------------------------------------
 # aliases
 # ----------------------------------------
-alias c="clear"
-alias l="ls -l"
 if [ $(uname) == "Linux" ]; then
     alias ls="ls --color=auto"
-elif
+elif [ $(uname) == "Darwin" ]; then
     alias ls="ls -G"
 fi
+
+alias c="clear"
+alias l="ls -l"
 alias ll="ls -l"
 alias la="ls -a"
 alias .='source'

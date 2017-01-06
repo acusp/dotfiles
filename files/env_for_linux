@@ -2,5 +2,5 @@
 # PATH
 PATH="$HOME/bin:/usr/local/bin:$PATH"
 if [ -d $HOME/Android ]; then
-    PATH="$HOME/Android/sdk/platform-tools:$PATH"
+    PATH="$HOME/Android/Sdk/platform-tools:$PATH"
 fi
