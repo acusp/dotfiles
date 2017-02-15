@@ -86,27 +86,20 @@ CELL_DICT = {
 def usage():
     print("[Usage]: python grep_cve.py COLUMN")
 
+def isExist(file_name):
+    if os.path.isfile(file_name):
+        pass
+    else:
+        print("Error: The file %s is not exist!" % file_name)
+        sys.exit(1)
+
 if len(sys.argv) != 2:
     usage()
     sys.exit(1)
 
-if os.path.isfile('mario_log.txt'):
-    pass
-else:
-    print("Error: The file mario_log.txt is not exist!")
-    sys.exit(1)
-
-if os.path.isfile('device_prop.txt'):
-    pass
-else:
-    print("Error: The file device_prop.txt is not exist!")
-    sys.exit(1)
-
-if os.path.isfile('kernel_info.txt'):
-    pass
-else:
-    print("Error: The file kernel_info.txt is not exist!")
-    sys.exit(1)
+isExist('mario_log.txt')
+isExist('device_prop.txt')
+isExist('kernel_info.txt')
 
 wb = load_workbook('/home/acusp/Desktop/test.xlsx')
 ws = wb['System Vulnerability Raw Data']
@@ -143,8 +136,7 @@ COL[2].value = COL[4].value
 # create info.txt
 # ======================
 info = []
-info.append(''.join(re.findall('.*ro.product.brand\].*', devices_info)))
-info.append('\n')
+info.append(''.join(re.findall('.*ro.product.brand\].*', devices_info)) + '\n')
 info.append(''.join(re.findall('.*ro.product.model\].*', devices_info)))
 f = open('../info.txt', 'w')
 f.writelines(info)
