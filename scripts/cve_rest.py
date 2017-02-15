@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import os
@@ -144,6 +144,7 @@ COL[2].value = COL[4].value
 # ======================
 info = []
 info.append(''.join(re.findall('.*ro.product.brand\].*', devices_info)))
+info.append('\n')
 info.append(''.join(re.findall('.*ro.product.model\].*', devices_info)))
 f = open('../info.txt', 'w')
 f.writelines(info)
