@@ -184,3 +184,7 @@ let g:airline_right_alt_sep = ' '
 let g:airline_symbols.branch = ' '
 let g:airline_symbols.readonly = ' '
 let g:airline_symbols.linenr = ''
+"
+" delimitMate
+" for python docstring
+au FileType python let b:delimitMate_nesting_quotes = ['"']

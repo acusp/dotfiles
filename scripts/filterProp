@@ -1,6 +1,4 @@
 #!/bin/bash
-# author : sphantix
-# created time: Wed 11 Jan 2017 08:16:22 PM CST
 
 new_file="neededProperties.txt"
 
