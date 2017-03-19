@@ -154,6 +154,9 @@ let g:ycm_auto_trigger=0
 " \y - turn off YCM; \Y - turn on YCM
 nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>
 nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>
+"
+" python
+let g:ycm_python_binary_path = 'python3'
 
 
 " [ vim-airline ]
