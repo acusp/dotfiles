@@ -74,7 +74,7 @@ requirement() {
         	sudo add-apt-repository -y ppa:jonathonf/vim   # vim version 8
         	sudo add-apt-repository -y ppa:hzwhuang/ss-qt5
         	sudo apt update
-        	sudo apt-get install -y vim vim-gtk git wget curl build-essential cmake python-dev python3-dev ppa-purge proxychains shadowsocks-qt5
+        	sudo apt-get install -y vim vim-gtk git wget curl build-essential cmake python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip ppa-purge proxychains trash-cli shadowsocks-qt5
 		else
 			echo "# -> [-] Sorry, please install some packages by yourself!"
 		fi

@@ -15,6 +15,7 @@ alias .='source'
 alias vi='vim'
 alias javac="javac -J-Dfile.encoding=utf8"
 alias grep="grep --color=auto"
+alias rm="trash-put"
 
 
 # ----------------------------------------
