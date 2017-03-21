@@ -65,7 +65,7 @@ requirement() {
 			echo "# -> [+] Downloading brew first ..."
 	    	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	    fi
-        brew install git wget proxychains-ng cmake
+        brew install git wget proxychains-ng cmake ranger
 		echo "# -> [-] Please download shadowsocks client on https://github.com/shadowsocks/shadowsocks-iOS/releases/"
 
     elif [ $os == 'Linux' ];then
@@ -74,7 +74,7 @@ requirement() {
         	sudo add-apt-repository -y ppa:jonathonf/vim   # vim version 8
         	sudo add-apt-repository -y ppa:hzwhuang/ss-qt5
         	sudo apt update
-        	sudo apt-get install -y vim vim-gtk git wget curl build-essential cmake python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip ppa-purge proxychains trash-cli shadowsocks-qt5
+        	sudo apt-get install -y vim vim-gtk git wget curl build-essential cmake python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip ppa-purge proxychains trash-cli ranger shadowsocks-qt5
 		else
 			echo "# -> [-] Sorry, please install some packages by yourself!"
 		fi
