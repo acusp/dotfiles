@@ -38,7 +38,7 @@ filetype plugin indent on    " required
 
 
 " ------------------------------------------------------------
-" 2. format control
+" 2. General
 " ------------------------------------------------------------
 
 syntax on
@@ -78,6 +78,17 @@ elseif has("win32") || has("win64")
 elseif has("gui_macvim")
     set guifont=DejaVu_Sans_Mono_for_Powerline:h12
 end
+
+
+" clipboard
+"
+if has('clipboard')
+        if has('unnamedplus')  " When possible use + register for copy-paste
+            set clipboard=unnamed,unnamedplus
+        else         " On mac and Windows, use * register for copy-paste
+            set clipboard=unnamed
+        endif
+endif
 
 
 " ------------------------------------------------------------
