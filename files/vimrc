@@ -218,6 +218,8 @@ au FileType python let b:delimitMate_nesting_quotes = ['"']
 " [ markdown-preview.vim ]
 "
 let g:mkdp_path_to_chrome = "google-chrome"
+"let g:mkdp_path_to_chrome = "firefox"
+"let g:mkdp_path_to_chrome = "open -a Google\\ Chrome"
 
 
 " [ Syntastic ]
