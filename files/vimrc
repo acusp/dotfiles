@@ -23,7 +23,8 @@ Plugin 'The-NERD-Commenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'mhinz/vim-startify'
 Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'acusp/AuthorInfo'
+"Plugin 'acusp/AuthorInfo'
+Plugin 'acusp/vim-header'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -82,11 +83,17 @@ end
 " 3. authorinfo
 " ------------------------------------------------------------
 
-let g:vimrc_author='acusp'
-let g:vimrc_email='acusp.xu@gmail.com'
-let g:vimrc_homepage='acusp.info'
+"let g:vimrc_author='acusp'
+"let g:vimrc_email='acusp.xu@gmail.com'
+"let g:vimrc_homepage='http://acusp.info'
 
-nmap <F4> :AuthorInfoDetect<cr>
+"nmap <F4> :AuthorInfoDetect<cr>
+
+let g:header_field_author = 'acusp'
+let g:header_field_author_email = 'acusp.xu@gmail.com'
+let g:header_field_timestamp_format = '%c'
+
+nmap <F4> :AddHeader<CR>
 
 
 " ------------------------------------------------------------
