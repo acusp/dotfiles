@@ -21,9 +21,9 @@
 │
 ├── scripts
 │   │
-│   ├── androidEnv.sh   //add android develop env
+│   ├── androidEnv.sh   #add android develop env
 │   │
-│   └── youcompleteme.sh    //compile YouCompleteMe
+│   └── youcompleteme.sh    #compile YouCompleteMe
 │
 ├── install.sh
 │
