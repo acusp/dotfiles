@@ -22,3 +22,4 @@ alias rm="trash-put"
 # envionment variables
 # ----------------------------------------
 PS1="[\u@\h \w]"\$
+PATH=$HOME/bin:$PATH

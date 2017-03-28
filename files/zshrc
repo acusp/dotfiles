@@ -104,3 +104,4 @@ alias -s tar="tar -xvf"
 # ----------------------------------------
 # envionment variables
 # ----------------------------------------
+PATH=$HOME/bin:$PATH
