@@ -48,11 +48,13 @@ backup_copy() {
     do_backup .bashrc
     do_backup .gitconfig
     do_backup .tmux.conf
+    do_backup .ycm_extra_conf.py
     cp $(pwd)/files/vimrc $HOME/.vimrc
     cp $(pwd)/files/zshrc $HOME/.zshrc
     cp $(pwd)/files/bashrc $HOME/.bashrc
     cp $(pwd)/files/gitconfig $HOME/.gitconfig
     cp $(pwd)/files/tmux.conf $HOME/.tmux.conf
+    cp $(pwd)/files/ycm_extra_conf.py $HOME/.vim/.ycm_extra_conf.py
 
 	echo "# -> [+] Exit from backup & link"
     echo "#"
