@@ -134,6 +134,16 @@ tmux() {
     echo "#"
 }
 
+spacemacs() {
+    mv $HOME/.emacs.d $HOME/.emacs.d.bak
+    mv $HOME/.emacs $HOME/.emacs.bak
+
+    git clone https://github.com/syl20bnr/spacemacs $HOME/.emacs.d
+
+	echo "# -> [+] Exit from install spacemacs"
+    echo "#"
+}
+
 setEnv() {
     if [ ! -d $HOME/bin ]; then
         mkdir $HOME/bin
