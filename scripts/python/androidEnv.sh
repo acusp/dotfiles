@@ -58,7 +58,7 @@ echo "# 2. Install Required Packages"
 echo "# --------------------------------------------------------"
 echo "#"
 
-required_packages
+#required_packages
 
 echo "# --------------------------------------------------------"
 echo "# 3. Install Repo"
