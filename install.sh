@@ -45,16 +45,21 @@ install() {
 backup_copy() {
     do_backup .vimrc
     do_backup .zshrc
-    do_backup .bashrc
     do_backup .gitconfig
     do_backup .tmux.conf
     do_backup .ycm_extra_conf.py
-    cp $(pwd)/files/vimrc $HOME/.vimrc
-    cp $(pwd)/files/zshrc $HOME/.zshrc
-    cp $(pwd)/files/bashrc $HOME/.bashrc
-    cp $(pwd)/files/gitconfig $HOME/.gitconfig
-    cp $(pwd)/files/tmux.conf $HOME/.tmux.conf
-    cp $(pwd)/files/ycm_extra_conf.py $HOME/.vim/.ycm_extra_conf.py
+    cp -rf $(pwd)/files/vimrc $HOME/.vimrc
+    cp -rf $(pwd)/files/zshrc $HOME/.zshrc
+    cp -rf $(pwd)/files/gitconfig $HOME/.gitconfig
+    cp -rf $(pwd)/files/tmux.conf $HOME/.tmux.conf
+
+    if [ $os == 'Darwin' ];then
+        do_backup .bash_profile
+        cp -rf $(pwd)/files/bashrc $HOME/.bash_profile
+    elif [ $os == 'Linux' ];then
+        do_backup .bashrc
+        cp -rf $(pwd)/files/bashrc $HOME/.bashrc
+    fi
 
 	echo "# -> [+] Exit from backup & link"
     echo "#"
@@ -87,13 +92,15 @@ requirement() {
 }
 
 vim() {
+    cp -rf $(pwd)/files/ycm_extra_conf.py $HOME/.vim/.ycm_extra_conf.py
+
     # Vundle
 	if [ ! -d $HOME/.vim/bundle ];then
 		echo "# -> [+] Downloading bundle..."
     	git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 	fi
 
-    # Powerlin fonts
+    # Powerline fonts
 	if [ ! -d $HOME/.vim/fonts ];then
 		echo "# -> [+] Downloading essential fonts..."
     	git clone https://github.com/powerline/fonts.git $HOME/.vim/fonts
@@ -154,7 +161,7 @@ setEnv() {
         cat $(pwd)/files/env_for_linux >> $HOME/.bashrc
     elif [ $os == 'Darwin' ];then
         cat $(pwd)/files/env_for_mac >> $HOME/.zshrc
-        cat $(pwd)/files/env_for_mac >> $HOME/.bashrc
+        cat $(pwd)/files/env_for_mac >> $HOME/.bash_profile
     fi
 
     echo "# -> [+] Exit from setEnv"
