@@ -234,5 +234,5 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 "
 " Pylint
-let g:syntastic_python_checkers=['pylint']
-g:syntastic_python_pylint_args='--disable=C0111,R0903,C0301'
+" let g:syntastic_python_checkers=['pylint']
+" g:syntastic_python_pylint_args='--disable=C0111,R0903,C0301'

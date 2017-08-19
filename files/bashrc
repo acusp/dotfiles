@@ -7,10 +7,11 @@ elif [ $(uname) == "Darwin" ]; then
     alias ls="ls -G"
 fi
 
+alias .='source'
 alias c="clear"
+alias l="ls -l"
 alias la="ls -a"
 alias ll="ls -lha"
-alias .='source'
 alias vi='vim'
 alias javac="javac -J-Dfile.encoding=utf8"
 alias grep="grep --color=auto"
