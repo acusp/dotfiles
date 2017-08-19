@@ -84,12 +84,13 @@ source $ZSH/oh-my-zsh.sh
 
 alias .='source'
 alias c='clear'
-alias ll='ls -l'
+alias ll='ls -lha'
 alias la='ls -a'
 alias vi='vim'
 alias javac="javac -J-Dfile.encoding=utf8"
 alias grep="grep --color=auto"
 alias rm="trash-put"
+alias screenfetch="screenfetch -E"
 
 alias -s c=vi
 alias -s java=vi

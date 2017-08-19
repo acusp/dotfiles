@@ -2,6 +2,26 @@
 
 os=$(uname)
 
+bad_echo() {
+    echo -e "# -> \033[0;31m$1\033[0m"
+}
+
+nice_echo() {
+    echo -e "# -> \033[0;36m$1\033[0m"
+}
+
+msg_header() {
+    echo "# --------------------------------------------------------"
+    nice_echo "[+] $1"
+    echo "# --------------------------------------------------------"
+    echo "#"
+}
+
+msg_footer() {
+    nice_echo "[+] Exit from $1()"
+    echo "#"
+}
+
 do_backup() {
     backup=$HOME/backup/dotfiles
     if [ ! -d $backup ]; then
@@ -16,10 +36,10 @@ do_backup() {
 
 isExist() {
     if which $1 >/dev/null 2>&1;then
-        echo "# -> [+] $1 exist"
+        nice_echo "[+] $1 exist"
         return 0
     else
-        echo "# -> [-] $1 not exist"
+        bad_echo "[-] $1 not exist"
         return 1
     fi
 
@@ -28,21 +48,26 @@ isExist() {
 install() {
     isExist $1
     if [ "$?" -ne 0 ]; then
-        echo "# -> [+] install $1..."
+        nice_echo "[+] install $1..."
         if [ $os == 'Darwin' ];then
             brew install $1
         elif [ $os == 'Linux' ];then
             if which apt-get >/dev/null; then
                 sudo apt-get install -y $1
             else
-                echo "# -> [-] Sorry, please install $1 by yourself!"
+                bad_echo "[-] Sorry, please install $1 by yourself!"
             fi
         fi
     fi
 }
 
+#==============================================================================#
+#==============================================================================#
+
 # backup & link dot files
 backup_copy() {
+    msg_header "Update config files"
+
     do_backup .vimrc
     do_backup .zshrc
     do_backup .gitconfig
@@ -61,19 +86,20 @@ backup_copy() {
         cp -rf $(pwd)/files/bashrc $HOME/.bashrc
     fi
 
-	echo "# -> [+] Exit from backup & link"
-    echo "#"
+    msg_footer backup_copy
 }
 
 requirement() {
+    msg_header "Install some requirements"
+
     if [ $os == 'Darwin' ];then
 		isExist brew
 	    if [ "$?" -ne 0 ]; then
-			echo "# -> [+] Downloading brew first ..."
+			nice_echo "[+] Downloading brew first ..."
 	    	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	    fi
-        brew install git wget proxychains-ng cmake ranger
-		echo "# -> [-] Please download shadowsocks client on https://github.com/shadowsocks/shadowsocks-iOS/releases/"
+        brew install git wget proxychains-ng cmake ranger screenfecth
+		bad_echo "[-] Please download shadowsocks client on https://github.com/shadowsocks/shadowsocks-iOS/releases/"
 
     elif [ $os == 'Linux' ];then
 		if which apt-get >/dev/null; then
@@ -81,28 +107,29 @@ requirement() {
         	sudo add-apt-repository -y ppa:jonathonf/vim   # vim version 8
         	sudo add-apt-repository -y ppa:hzwhuang/ss-qt5
         	sudo apt update
-        	sudo apt-get install -y vim vim-gtk git wget curl build-essential cmake python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip ppa-purge proxychains trash-cli ranger shadowsocks-qt5
+        	sudo apt-get install -y vim vim-gtk git wget curl build-essential cmake python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip ppa-purge proxychains trash-cli ranger shadowsocks-qt5 screenfecth
 		else
-			echo "# -> [-] Sorry, please install some packages by yourself!"
+			bad_echo "[-] Sorry, please install some packages by yourself!"
 		fi
     fi
 
-	echo "# -> [+] Exit from install requirement"
-    echo "#"
+    msg_footer requirement
 }
 
 vim() {
+    msg_header "Install some tools about vim"
+
     cp -rf $(pwd)/files/ycm_extra_conf.py $HOME/.vim/.ycm_extra_conf.py
 
     # Vundle
 	if [ ! -d $HOME/.vim/bundle ];then
-		echo "# -> [+] Downloading bundle..."
+		nice_echo "[+] Downloading bundle..."
     	git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 	fi
 
     # Powerline fonts
 	if [ ! -d $HOME/.vim/fonts ];then
-		echo "# -> [+] Downloading essential fonts..."
+		nice_echo "[+] Downloading essential fonts..."
     	git clone https://github.com/powerline/fonts.git $HOME/.vim/fonts
     	$HOME/.vim/fonts/install.sh
 	fi
@@ -112,14 +139,15 @@ vim() {
     # cscope
     install cscope
 
-	echo "# -> [+] Exit from install vim"
-    echo "#"
+    msg_footer vim
 }
 
 zsh() {
+    msg_header "Install some tools about zsh"
+
     # oh-my-zsh
 	if [ ! -d $HOME/.oh-my-zsh ];then
-        echo "# -> [+] Downloading oh-my-zsh..."
+        nice_echo "[+] Downloading oh-my-zsh..."
         git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
     fi
 
@@ -129,16 +157,16 @@ zsh() {
     # autojump
     install autojump
 
-	echo "# -> [+] Exit from install zsh"
-    echo "#"
+    msg_footer zsh
 }
 
 tmux() {
+    msg_header "Install some tools about Tmux"
+
     # tmux
     install tmux
 
-	echo "# -> [+] Exit from install tmux"
-    echo "#"
+    msg_footer tmux
 }
 
 spacemacs() {
@@ -147,11 +175,12 @@ spacemacs() {
 
     git clone https://github.com/syl20bnr/spacemacs $HOME/.emacs.d
 
-	echo "# -> [+] Exit from install spacemacs"
-    echo "#"
+    msg_footer spacemacs
 }
 
 setEnv() {
+    msg_header "Set some environment variables"
+
     if [ ! -d $HOME/bin ]; then
         mkdir $HOME/bin
     fi
@@ -164,53 +193,34 @@ setEnv() {
         cat $(pwd)/files/env_for_mac >> $HOME/.bash_profile
     fi
 
-    echo "# -> [+] Exit from setEnv"
-    echo "#"
+    msg_footer "setEnv"
 }
 
-# main()
+main() {
+    option=$1
 
-echo "# --------------------------------------------------------"
-echo "# 1. Backup and Link"
-echo "# --------------------------------------------------------"
-echo "#"
+    backup_copy
+    setEnv
 
-backup_copy
+    if [ "$optioin" == "init" ]; then
+        requirement
+        vim
+        zsh
+        tmux
+    fi
 
-echo "# --------------------------------------------------------"
-echo "# 2. Install some requirements"
-echo "# --------------------------------------------------------"
-echo "#"
+    nice_echo "[+] Install Success !"
+    echo "# --------------------------------------------------------"
+}
 
-requirement
+#==============================================================================#
+#==============================================================================#
 
-echo "# --------------------------------------------------------"
-echo "# 3. Install some tools about vim"
-echo "# --------------------------------------------------------"
-echo "#"
+# main
 
-vim
-
-echo "# --------------------------------------------------------"
-echo "# 4. Install some tools about zsh"
-echo "# --------------------------------------------------------"
-echo "#"
-
-zsh
-
-echo "# --------------------------------------------------------"
-echo "# 5. Install some tools about Tmux"
-echo "# --------------------------------------------------------"
-echo "#"
-
-tmux
-
-echo "# --------------------------------------------------------"
-echo "# 6. Set some environment variables"
-echo "# --------------------------------------------------------"
-echo "#"
-
-setEnv
-
-echo "# -> [+] Install finish !"
-echo "# --------------------------------------------------------"
+if [ $# != 1 ]; then
+    echo "Usage:"
+    echo "./install init|update"
+    exit -1
+fi
+main $1
