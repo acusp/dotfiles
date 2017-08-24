@@ -17,6 +17,7 @@ alias javac="javac -J-Dfile.encoding=utf8"
 alias grep="grep --color=auto"
 alias rm="trash-put"
 alias screenfetch="screenfetch -E"
+alias emacs="setsid env LC_CTYPE=zh_CN.UTF-8 emacs >/dev/null 2>&1 &"
 
 
 # ----------------------------------------
