@@ -184,6 +184,7 @@ setEnv() {
     if [ ! -d $HOME/bin ]; then
         mkdir $HOME/bin
     fi
+    cp -f $(pwd)/files/emacs_alias.sh $HOME/bin/
 
     if [ $os == 'Linux' ];then
         cat $(pwd)/files/env_for_linux >> $HOME/.zshrc
