@@ -21,6 +21,18 @@ alias emacs="$HOME/bin/emacs_alias.sh"
 
 
 # ----------------------------------------
+# Function
+# ----------------------------------------
+function run() {
+    number=$1
+    shift
+    for n in $(seq $number); do
+      $@
+    done
+}
+
+
+# ----------------------------------------
 # envionment variables
 # ----------------------------------------
 export PS1="[\u@\h \w]"\$

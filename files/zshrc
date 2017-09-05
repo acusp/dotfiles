@@ -103,6 +103,19 @@ alias -s bz2='tar -xjvf'
 alias -s xz="xz -d"
 alias -s tar="tar -xvf"
 
+
+# ----------------------------------------
+# Function
+# ----------------------------------------
+function run() {
+    number=$1
+    shift
+    for n in $(seq $number); do
+      $@
+    done
+}
+
+
 # ----------------------------------------
 # envionment variables
 # ----------------------------------------
