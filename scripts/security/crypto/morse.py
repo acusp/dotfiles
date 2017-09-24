@@ -31,24 +31,24 @@ DCODE = {'.-'	: 'A',  '-...'	: 'B',  '-.-.'	: 'C',
         '-....'	: '6',  '--...'	: '7',  '---..'	: '8',
         '----.'	: '9'
         }
-		
+
 def encode():
-	msg = raw_input('PLAIN TEXT: ')
-	for char in msg:
-		if char == ' ':
-			print ' ',
-		else:
-			print ECODE[char.upper()] + ' ',
-	print
-			
+    msg = raw_input('PLAIN TEXT: ')
+    for char in msg:
+        if char == ' ':
+            print ' ',
+        else:
+            print ECODE[char.upper()] + ' ',
+    print
+
 def decode():
-	msg = raw_input('CIPHER TEXT: ')
-	morses = msg.split(' ')
-	str = ''
-	for i in morses:
-		str = str + DCODE[i]
-	print str
+    msg = raw_input('CIPHER TEXT: ')
+    morses = msg.split(' ')
+    str = ''
+    for i in morses:
+        str = str + DCODE[i]
+    print str
 
 if __name__ == "__main__":
-	encode()
-	decode()
+    encode()
+    decode()

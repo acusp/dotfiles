@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-# __author__ = "F1uYu4n really"
-
 import json
 import re
 import threading

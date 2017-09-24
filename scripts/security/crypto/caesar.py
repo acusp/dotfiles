@@ -1,116 +1,117 @@
-# _*_ coding: utf-8 _*_
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import sys
 
-#aµÄANSIÂëÊÇ97, zµÄANSIÂëÊÇ122¡£
-#AµÄANSIÂëÊÇ65, ZµÄANSIÂëÊÇ90¡£
+# açš„ANSIç æ˜¯97, zçš„ANSIç æ˜¯122ã€‚
+# Açš„ANSIç æ˜¯65, Zçš„ANSIç æ˜¯90ã€‚
 
 def caesar_encry():
-	cipher = ""
-	plain = raw_input("Please input plain text: ")
-	shift = raw_input("Please input key: ")
-	plain_list = list(plain)
-	 
-	try:
-		shift=int(shift)
-	except shiftError:
-		print("Please input an integer.")
-		sys.exit()
-		
-	plain_list_len = len(plain_list)
+    cipher = ""
+    plain = raw_input("Please input plain text: ")
+    shift = raw_input("Please input key: ")
+    plain_list = list(plain)
+
+    try:
+        shift=int(shift)
+    except shiftError:
+        print("Please input an integer.")
+        sys.exit()
+
+        plain_list_len = len(plain_list)
 	times = 0
 	while times < plain_list_len:
-		times=times+1
-		#ansi_raw¼´Ã»ÓĞ¾­¹ıÈÎºÎ´¦ÀíµÄÔ­Ê¼ANSI¡£
-		ansi_raw=ord(plain_list[times-1])
-		
-		if ansi_raw == 32:
-			cipher += " "
-			continue
-		 
-		#ansiÊÇ¾­¹ıÒÆÎ»¼ÓÃÜµÄANSI¡£
-		ansi=ansi_raw+int(shift) 
-		#wordÊÇÓÃ»§ÊäÈëµÄÔ­Ê¼×Ö·û¡£
+            times=times+1
+            #ansi_rawå³æ²¡æœ‰ç»è¿‡ä»»ä½•å¤„ç†çš„åŸå§‹ANSIã€‚
+            ansi_raw=ord(plain_list[times-1])
+
+            if ansi_raw == 32:
+                cipher += " "
+                continue
+
+		#ansiæ˜¯ç»è¿‡ç§»ä½åŠ å¯†çš„ANSIã€‚
+		ansi=ansi_raw+int(shift)
+		#wordæ˜¯ç”¨æˆ·è¾“å…¥çš„åŸå§‹å­—ç¬¦ã€‚
 		word=(plain_list[times-1])
-	 
-		#Èç¹ûansi_rawĞ¡ÓÚ65»ò´óÓÚ90£¬¶øÇÒ»¹²»ÊÇĞ¡Ğ´×ÖÄ¸£¬ÄÇÃ´ÔòËµÃ÷Ëü¸ù±¾¾Í²»ÊÇ×ÖÄ¸¡£²»¼ÓÃÜ£¬Ö±½ÓÊä³öÔ­Ê¼ÄÚÈİ¡£
+
+		#å¦‚æœansi_rawå°äº65æˆ–å¤§äº90ï¼Œè€Œä¸”è¿˜ä¸æ˜¯å°å†™å­—æ¯ï¼Œé‚£ä¹ˆåˆ™è¯´æ˜å®ƒæ ¹æœ¬å°±ä¸æ˜¯å­—æ¯ã€‚ä¸åŠ å¯†ï¼Œç›´æ¥è¾“å‡ºåŸå§‹å†…å®¹ã€‚
 		if (ansi_raw < 65 or ansi_raw > 90) and word.islower() == False :
-			print "Plain text is not letter,", word
-		#Èç¹ûansi_rawĞ¡ÓÚ97»ò´óÓÚ122£¬¶øÇÒ»¹²»ÊÇ´óĞ´×ÖÄ¸£¬ÄÇÃ´ÔòËµÃ÷Ëü¸ù±¾²»ÊÇ×ÖÄ¸¡£²»¼ÓÃÜ£¬Ö±½ÓÊä³öÔ­Ê¼ÄÚÈİ¡£
+                    print "Plain text is not letter,", word
+		#å¦‚æœansi_rawå°äº97æˆ–å¤§äº122ï¼Œè€Œä¸”è¿˜ä¸æ˜¯å¤§å†™å­—æ¯ï¼Œé‚£ä¹ˆåˆ™è¯´æ˜å®ƒæ ¹æœ¬ä¸æ˜¯å­—æ¯ã€‚ä¸åŠ å¯†ï¼Œç›´æ¥è¾“å‡ºåŸå§‹å†…å®¹ã€‚
 		elif (ansi_raw < 97 or ansi_raw > 122) and word.isupper() == False:
-			print "Plain text is not letter,", word
-	 
-		#·ñÔò£¬Ëü¾ÍÊÇ×ÖÄ¸¡£
+                    print "Plain text is not letter,", word
+
+		#å¦åˆ™ï¼Œå®ƒå°±æ˜¯å­—æ¯ã€‚
 		else:
-			#Èç¹ûËüÊÇ´óĞ´×ÖÄ¸£¬¶øÇÒANSIÂë´óÓÚ90£¬ÔòËµÃ÷Ïòºó³ö½ç¡£ÄÇÃ´Í¨¹ıÕâ¸ö¹«Ê½»Øµ½¿ªÍ·£¬Ö±µ½²»³ö½çÎªÖ¹¡£
-			while word.isupper() == True and ansi > 90:
-				ansi = -26 + ansi 
-			#Èç¹ûËüÊÇ´óĞ´×ÖÄ¸£¬¶øÇÒANSIÂëĞ¡ÓÚ65£¬ÔòËµÃ÷ÏòÇ°³ö½ç¡£ÄÇÃ´Í¨¹ıÕâ¸ö¹«Ê½»Øµ½½áÎ²£¬Ö±µ½²»³ö½çÎªÖ¹¡£
-			while word.isupper() == True and ansi < 65:
-				ansi = 26 + ansi
-			#Èç¹ûËüÊÇĞ¡Ğ´×ÖÄ¸£¬¶øÇÒANSIÂë´óÓÚ122£¬ÔòËµÃ÷Ïòºó³ö½ç¡£ÄÇÃ´Í¨¹ıÕâ¸ö¹«Ê½»Øµ½¿ªÍ·£¬Ö±µ½²»³ö½çÎªÖ¹¡£
-			while word.isupper() == False and ansi > 122:
-				ansi = -26 + ansi
-			#Èç¹ûËüÊÇĞ¡Ğ´×ÖÄ¸£¬¶øÇÒANSIÂëĞ¡ÓÚ97£¬ÔòËµÃ÷ÏòÇ°³ö½ç¡£ÄÇÃ´Í¨¹ıÕâ¸ö¹«Ê½»Øµ½½áÎ²£¬Ö±µ½²»³ö½çÎªÖ¹¡£
-			while word.isupper() == False and ansi < 97:
-				ansi = 26 + ansi
-		 
-			#½«´¦Àí¹ıµÄANSI×ª»»Îª×Ö·û£¬À´Êä³öÃÜÎÄ¡£
-			cipher += chr(ansi)
-		
+                    #å¦‚æœå®ƒæ˜¯å¤§å†™å­—æ¯ï¼Œè€Œä¸”ANSIç å¤§äº90ï¼Œåˆ™è¯´æ˜å‘åå‡ºç•Œã€‚é‚£ä¹ˆé€šè¿‡è¿™ä¸ªå…¬å¼å›åˆ°å¼€å¤´ï¼Œç›´åˆ°ä¸å‡ºç•Œä¸ºæ­¢ã€‚
+                    while word.isupper() == True and ansi > 90:
+                        ansi = -26 + ansi
+                    #å¦‚æœå®ƒæ˜¯å¤§å†™å­—æ¯ï¼Œè€Œä¸”ANSIç å°äº65ï¼Œåˆ™è¯´æ˜å‘å‰å‡ºç•Œã€‚é‚£ä¹ˆé€šè¿‡è¿™ä¸ªå…¬å¼å›åˆ°ç»“å°¾ï¼Œç›´åˆ°ä¸å‡ºç•Œä¸ºæ­¢ã€‚
+                    while word.isupper() == True and ansi < 65:
+                        ansi = 26 + ansi
+                    #å¦‚æœå®ƒæ˜¯å°å†™å­—æ¯ï¼Œè€Œä¸”ANSIç å¤§äº122ï¼Œåˆ™è¯´æ˜å‘åå‡ºç•Œã€‚é‚£ä¹ˆé€šè¿‡è¿™ä¸ªå…¬å¼å›åˆ°å¼€å¤´ï¼Œç›´åˆ°ä¸å‡ºç•Œä¸ºæ­¢ã€‚
+                    while word.isupper() == False and ansi > 122:
+                        ansi = -26 + ansi
+                    #å¦‚æœå®ƒæ˜¯å°å†™å­—æ¯ï¼Œè€Œä¸”ANSIç å°äº97ï¼Œåˆ™è¯´æ˜å‘å‰å‡ºç•Œã€‚é‚£ä¹ˆé€šè¿‡è¿™ä¸ªå…¬å¼å›åˆ°ç»“å°¾ï¼Œç›´åˆ°ä¸å‡ºç•Œä¸ºæ­¢ã€‚
+                    while word.isupper() == False and ansi < 97:
+                        ansi = 26 + ansi
+
+                    #å°†å¤„ç†è¿‡çš„ANSIè½¬æ¢ä¸ºå­—ç¬¦ï¼Œæ¥è¾“å‡ºå¯†æ–‡ã€‚
+                    cipher += chr(ansi)
+
 	print "Cipher text: ", cipher
-	
+
 def caesar_decry():
-	plain = ["","","","","","","","","","","","","","","","","","","","","","","","","",""]
-	cipher = raw_input("Please input cipher text: ")
-	cipher_list = list(cipher)
-		
-	cipher_list_len = len(cipher_list)
-	
-	for shift in range(1, 26):
-		times = 0
-		while times < cipher_list_len:
-			times=times+1
-			#ansi_raw¼´Ã»ÓĞ¾­¹ıÈÎºÎ´¦ÀíµÄÔ­Ê¼ANSI¡£
-			ansi_raw=ord(cipher_list[times-1])
-			
-			if ansi_raw == 32:
-				plain[shift] += " "
-				continue
-			 
-			#ansiÊÇ¾­¹ıÒÆÎ»¼ÓÃÜµÄANSI¡£
-			ansi=ansi_raw+int(shift) 
-			#wordÊÇÓÃ»§ÊäÈëµÄÔ­Ê¼×Ö·û¡£
-			word=(cipher_list[times-1])
-		 
-			#Èç¹ûansi_rawĞ¡ÓÚ65»ò´óÓÚ90£¬¶øÇÒ»¹²»ÊÇĞ¡Ğ´×ÖÄ¸£¬ÄÇÃ´ÔòËµÃ÷Ëü¸ù±¾¾Í²»ÊÇ×ÖÄ¸¡£²»¼ÓÃÜ£¬Ö±½ÓÊä³öÔ­Ê¼ÄÚÈİ¡£
-			if (ansi_raw < 65 or ansi_raw > 90) and word.islower() == False :
-				print "Cipher text is not letter,", word
-			#Èç¹ûansi_rawĞ¡ÓÚ97»ò´óÓÚ122£¬¶øÇÒ»¹²»ÊÇ´óĞ´×ÖÄ¸£¬ÄÇÃ´ÔòËµÃ÷Ëü¸ù±¾²»ÊÇ×ÖÄ¸¡£²»¼ÓÃÜ£¬Ö±½ÓÊä³öÔ­Ê¼ÄÚÈİ¡£
-			elif (ansi_raw < 97 or ansi_raw > 122) and word.isupper() == False:
-				print "Cipher text is not letter,", word
-		 
-			#·ñÔò£¬Ëü¾ÍÊÇ×ÖÄ¸¡£
-			else:
-				#Èç¹ûËüÊÇ´óĞ´×ÖÄ¸£¬¶øÇÒANSIÂë´óÓÚ90£¬ÔòËµÃ÷Ïòºó³ö½ç¡£ÄÇÃ´Í¨¹ıÕâ¸ö¹«Ê½»Øµ½¿ªÍ·£¬Ö±µ½²»³ö½çÎªÖ¹¡£
-				while word.isupper() == True and ansi > 90:
-					ansi = -26 + ansi 
-				#Èç¹ûËüÊÇ´óĞ´×ÖÄ¸£¬¶øÇÒANSIÂëĞ¡ÓÚ65£¬ÔòËµÃ÷ÏòÇ°³ö½ç¡£ÄÇÃ´Í¨¹ıÕâ¸ö¹«Ê½»Øµ½½áÎ²£¬Ö±µ½²»³ö½çÎªÖ¹¡£
-				while word.isupper() == True and ansi < 65:
-					ansi = 26 + ansi
-				#Èç¹ûËüÊÇĞ¡Ğ´×ÖÄ¸£¬¶øÇÒANSIÂë´óÓÚ122£¬ÔòËµÃ÷Ïòºó³ö½ç¡£ÄÇÃ´Í¨¹ıÕâ¸ö¹«Ê½»Øµ½¿ªÍ·£¬Ö±µ½²»³ö½çÎªÖ¹¡£
-				while word.isupper() == False and ansi > 122:
-					ansi = -26 + ansi
-				#Èç¹ûËüÊÇĞ¡Ğ´×ÖÄ¸£¬¶øÇÒANSIÂëĞ¡ÓÚ97£¬ÔòËµÃ÷ÏòÇ°³ö½ç¡£ÄÇÃ´Í¨¹ıÕâ¸ö¹«Ê½»Øµ½½áÎ²£¬Ö±µ½²»³ö½çÎªÖ¹¡£
-				while word.isupper() == False and ansi < 97:
-					ansi = 26 + ansi
-			 
-				#½«´¦Àí¹ıµÄANSI×ª»»Îª×Ö·û£¬À´Êä³öÃÜÎÄ¡£
-				plain[shift] += chr(ansi)
-			
-		print shift, "-", "Plain text: ", plain[shift]
+    plain = ["","","","","","","","","","","","","","","","","","","","","","","","","",""]
+    cipher = raw_input("Please input cipher text: ")
+    cipher_list = list(cipher)
+
+    cipher_list_len = len(cipher_list)
+
+    for shift in range(1, 26):
+        times = 0
+        while times < cipher_list_len:
+            times=times+1
+            #ansi_rawå³æ²¡æœ‰ç»è¿‡ä»»ä½•å¤„ç†çš„åŸå§‹ANSIã€‚
+            ansi_raw=ord(cipher_list[times-1])
+
+            if ansi_raw == 32:
+                plain[shift] += " "
+                continue
+
+            #ansiæ˜¯ç»è¿‡ç§»ä½åŠ å¯†çš„ANSIã€‚
+            ansi=ansi_raw+int(shift)
+            #wordæ˜¯ç”¨æˆ·è¾“å…¥çš„åŸå§‹å­—ç¬¦ã€‚
+            word=(cipher_list[times-1])
+
+            #å¦‚æœansi_rawå°äº65æˆ–å¤§äº90ï¼Œè€Œä¸”è¿˜ä¸æ˜¯å°å†™å­—æ¯ï¼Œé‚£ä¹ˆåˆ™è¯´æ˜å®ƒæ ¹æœ¬å°±ä¸æ˜¯å­—æ¯ã€‚ä¸åŠ å¯†ï¼Œç›´æ¥è¾“å‡ºåŸå§‹å†…å®¹ã€‚
+            if (ansi_raw < 65 or ansi_raw > 90) and word.islower() == False :
+                print "Cipher text is not letter,", word
+            #å¦‚æœansi_rawå°äº97æˆ–å¤§äº122ï¼Œè€Œä¸”è¿˜ä¸æ˜¯å¤§å†™å­—æ¯ï¼Œé‚£ä¹ˆåˆ™è¯´æ˜å®ƒæ ¹æœ¬ä¸æ˜¯å­—æ¯ã€‚ä¸åŠ å¯†ï¼Œç›´æ¥è¾“å‡ºåŸå§‹å†…å®¹ã€‚
+            elif (ansi_raw < 97 or ansi_raw > 122) and word.isupper() == False:
+                print "Cipher text is not letter,", word
+
+            #å¦åˆ™ï¼Œå®ƒå°±æ˜¯å­—æ¯ã€‚
+            else:
+                #å¦‚æœå®ƒæ˜¯å¤§å†™å­—æ¯ï¼Œè€Œä¸”ANSIç å¤§äº90ï¼Œåˆ™è¯´æ˜å‘åå‡ºç•Œã€‚é‚£ä¹ˆé€šè¿‡è¿™ä¸ªå…¬å¼å›åˆ°å¼€å¤´ï¼Œç›´åˆ°ä¸å‡ºç•Œä¸ºæ­¢ã€‚
+                while word.isupper() == True and ansi > 90:
+                    ansi = -26 + ansi
+                #å¦‚æœå®ƒæ˜¯å¤§å†™å­—æ¯ï¼Œè€Œä¸”ANSIç å°äº65ï¼Œåˆ™è¯´æ˜å‘å‰å‡ºç•Œã€‚é‚£ä¹ˆé€šè¿‡è¿™ä¸ªå…¬å¼å›åˆ°ç»“å°¾ï¼Œç›´åˆ°ä¸å‡ºç•Œä¸ºæ­¢ã€‚
+                while word.isupper() == True and ansi < 65:
+                    ansi = 26 + ansi
+                #å¦‚æœå®ƒæ˜¯å°å†™å­—æ¯ï¼Œè€Œä¸”ANSIç å¤§äº122ï¼Œåˆ™è¯´æ˜å‘åå‡ºç•Œã€‚é‚£ä¹ˆé€šè¿‡è¿™ä¸ªå…¬å¼å›åˆ°å¼€å¤´ï¼Œç›´åˆ°ä¸å‡ºç•Œä¸ºæ­¢ã€‚
+                while word.isupper() == False and ansi > 122:
+                    ansi = -26 + ansi
+                #å¦‚æœå®ƒæ˜¯å°å†™å­—æ¯ï¼Œè€Œä¸”ANSIç å°äº97ï¼Œåˆ™è¯´æ˜å‘å‰å‡ºç•Œã€‚é‚£ä¹ˆé€šè¿‡è¿™ä¸ªå…¬å¼å›åˆ°ç»“å°¾ï¼Œç›´åˆ°ä¸å‡ºç•Œä¸ºæ­¢ã€‚
+                while word.isupper() == False and ansi < 97:
+                    ansi = 26 + ansi
+
+                #å°†å¤„ç†è¿‡çš„ANSIè½¬æ¢ä¸ºå­—ç¬¦ï¼Œæ¥è¾“å‡ºå¯†æ–‡ã€‚
+                plain[shift] += chr(ansi)
+
+        print shift, "-", "Plain text: ", plain[shift]
 
 
 if __name__ == "__main__":
-	#caesar_encry()
-	caesar_decry()
-	input()
+    caesar_encry()
+    #caesar_decry()
+    input()
