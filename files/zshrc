@@ -102,6 +102,7 @@ alias -s zip='unzip'
 alias -s bz2='tar -xjvf'
 alias -s xz="xz -d"
 alias -s tar="tar -xvf"
+alias -s jar="java -jar"
 
 
 # ----------------------------------------
