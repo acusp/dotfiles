@@ -92,6 +92,7 @@ alias grep="grep --color=auto"
 alias rm="trash-put"
 alias screenfetch="screenfetch -E"
 alias emacs="$HOME/bin/emacs_alias.sh"
+alias pyc="python -c"
 
 alias -s c=vi
 alias -s java=vi
