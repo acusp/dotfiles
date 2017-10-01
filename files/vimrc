@@ -23,8 +23,7 @@ Plugin 'The-NERD-Commenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'mhinz/vim-startify'
 Plugin 'ntpeters/vim-better-whitespace'
-"Plugin 'acusp/AuthorInfo'
-Plugin 'acusp/vim-header'
+Plugin 'acusp/AuthorInfo'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -99,17 +98,11 @@ cmap w!! w !sudo tee > /dev/null %
 " 3. authorinfo
 " ------------------------------------------------------------
 
-"let g:vimrc_author='acusp'
-"let g:vimrc_email='acusp.xu@gmail.com'
-"let g:vimrc_homepage='http://acusp.info'
+let g:vimrc_author='acusp'
+let g:vimrc_email='acusp.xu@gmail.com'
+let g:vimrc_homepage='http://acusp.info'
 
-"nmap <F4> :AuthorInfoDetect<cr>
-
-let g:header_field_author = 'acusp'
-let g:header_field_author_email = 'acusp.xu@gmail.com'
-let g:header_field_timestamp_format = '%c'
-
-nmap <F4> :AddHeader<CR>
+nmap <F4> :AuthorInfoDetect<cr>
 
 
 " ------------------------------------------------------------
@@ -228,14 +221,14 @@ let g:mkdp_path_to_chrome = "google-chrome"
 
 " [ Syntastic ]
 "
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 "
 " Pylint
 " let g:syntastic_python_checkers=['pylint']
