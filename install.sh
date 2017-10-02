@@ -98,7 +98,7 @@ requirement() {
 			nice_echo "[+] Downloading brew first ..."
 	    	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	    fi
-        brew install git wget proxychains-ng cmake ranger screenfecth
+        brew install vim git wget proxychains-ng cmake ranger screenfecth
 		bad_echo "[-] Please download shadowsocks client on https://github.com/shadowsocks/shadowsocks-iOS/releases/"
 
     elif [ $os == 'Linux' ];then
