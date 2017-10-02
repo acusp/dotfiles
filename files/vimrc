@@ -56,6 +56,11 @@ set laststatus=2
 set hls
 "set foldmethod=syntax
 
+set backspace=2
+"0 same as “:set backspace=” (Vi compatible)
+"1 same as “:set backspace=indent,eol”
+"2 same as “:set backspace=indent,eol,start”
+
 
 " themes
 "
