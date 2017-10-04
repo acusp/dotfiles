@@ -31,8 +31,11 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Raimondi/delimitMate'
 Plugin 'iamcco/markdown-preview.vim'
 Plugin 'rking/ag.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'ctrlpvim/ctrlp.vim '
 Plugin 'vim-syntastic/syntastic'
 Plugin 'python-mode/python-mode'
+Plugin 'octol/vim-cpp-enhanced-highlight'
 
 
 " All of your Plugins must be added before the following line
@@ -328,3 +331,50 @@ let g:pymode_syntax = 1
 let g:pymode_syntax_all = 1
 let g:pymode_syntax_indent_errors = g:pymode_syntax_all
 let g:pymode_syntax_space_errors = g:pymode_syntax_all
+
+
+" [ cpp-enhanced-highlight ]
+"
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_concepts_highlight = 1
+let g:cpp_experimental_simple_template_highlight = 1
+
+
+" [ ack.vim ]
+"
+map <Leader>s :Ack!<Space>
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+let g:ackhighlight = 1
+let g:ack_qhandler = "botright copen 15"
+let g:ack_autoclose = 1
+let g:ack_use_cword_for_empty_search = 1
+
+
+" [ ctrlp.vim ]
+"
+let g:ctrlp_map = '<Leader>p'
+let g:ctrlp_cmd = 'CtrlP'
+nmap <Leader>f :CtrlPMRUFiles<CR>
+nmap <Leader>b :CtrlPBuffer<CR>
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ }
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_window_bottom = 1
+let g:ctrlp_max_height = 15
+let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_mruf_max = 300
+let g:ctrlp_follow_symlinks = 1
+let g:ctrlp_by_filename = 1
+let g:ctrlp_regexp = 0
+let g:ctrlp_line_prefix = '♪ '
+"
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l –nocolor –hidden -g ""'
+  let g:ctrlp_use_caching = 0
+endif
