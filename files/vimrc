@@ -30,7 +30,10 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Raimondi/delimitMate'
 Plugin 'iamcco/markdown-preview.vim'
+Plugin 'rking/ag.vim'
 Plugin 'vim-syntastic/syntastic'
+Plugin 'python-mode/python-mode'
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -54,13 +57,41 @@ set backupdir=~/backup
 set scrolloff=3
 set laststatus=2
 set hls
-"set foldmethod=syntax
-
+set incsearch
+set ignorecase
+set smartcase
+set magic
+set showmatch
+set autoread
 set backspace=2
 "0 same as “:set backspace=” (Vi compatible)
 "1 same as “:set backspace=indent,eol”
 "2 same as “:set backspace=indent,eol,start”
 
+map <Leader>a ggVG
+nnoremap <leader>c :cclose<bar>lclose<cr>
+nnoremap <F2> :set list! list?<CR>
+
+map <F5> :call CompileRun()<CR>
+func! CompileRun()
+    exec "w"
+    if &filetype == 'c'
+        exec "!gcc % -o %<"
+        exec "! ./%<"
+    elseif &filetype == 'cpp'
+        exec "!g++ % -o %<"
+        exec "! ./%<"
+    elseif &filetype == 'go'
+        exec "!time go run %"
+    elseif &filetype == 'java'
+        exec "!javac %"
+        exec "!java %<"
+    elseif &filetype == 'python'
+        exec "!time python3 %"
+    elseif &filetype == 'sh'
+        :!./%
+    endif
+endfunc
 
 " themes
 "
@@ -146,6 +177,9 @@ endif
 " [ TagList ]
 "
 nnoremap <silent> <F8> :TlistToggle<CR>
+let Tlist_Exit_OnlyWindow=1
+let Tlist_Use_Right_Window=1
+let Tlist_File_Fold_Auto_Close=1
 
 
 " [ NERDTree ]
@@ -227,15 +261,70 @@ let g:mkdp_path_to_chrome = "google-chrome"
 
 " [ Syntastic ]
 "
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_loc_list_height = 3
+let g:syntastic_auto_jump = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+"关闭syntastic语法检查, 鼠标复制代码时用到, 防止把错误标志给复制了
+nnoremap <silent> <Leader>ec :SyntasticToggleMode<CR>
+function! ToggleErrors()
+    let old_last_winnr = winnr('$')
+    lclose
+    if old_last_winnr == winnr('$')
+        " Nothing was closed, open syntastic error location panel
+        Errors
+    endif
+endfunction
+
+
+" [ python-mode ]
 "
-" Pylint
-" let g:syntastic_python_checkers=['pylint']
-" g:syntastic_python_pylint_args='--disable=C0111,R0903,C0301'
+let g:pymode_warnings = 0
+let g:pymode_trim_whitespaces = 1
+let g:pymode_options = 1
+let g:pymode_options_colorcolumn = 1
+let g:pymode_quickfix_minheight = 3
+let g:pymode_quickfix_maxheight = 10
+let g:pymode_indent = 1
+let g:pymode_folding = 0
+" set document
+let g:pymode_doc = 1
+let g:pymode_doc_bind = 'K'
+" syntactic check
+let g:pymode_lint = 1
+let g:pymode_lint_on_write = 0
+let g:pymode_lint_on_fly = 0
+let g:pymode_lint_checkers = ['pyflakes', 'pep8']
+let g:pymode_lint_cwindow = 0
+let g:pymode_lint_signs = 0
+" close run program use python-mode
+let g:pymode_run = 0
+" close debuger
+let g:pymode_breakpoint = 0
+"let g:pymode_breakpoint_bind = '<leader>b'
+let g:pymode_rope = 1
+let g:pymode_rope_lookup_project = 0
+let g:pymode_rope_show_doc_bind = '<C-c>d'
+let g:pymode_rope_regenerate_on_write = 1
+" auto completion
+let g:pymode_rope_completion = 1
+let g:pymode_rope_complete_on_dot = 1
+let g:pymode_rope_completion_bind = '<Tab>'
+" goto
+let g:pymode_rope_goto_definition_bind = '<C-c>g'
+let g:pymode_rope_goto_definition_cmd = 'vnew'
+let g:pymode_rope_rename_bind = '<C-c>rr'
+let g:pymode_rope_rename_module_bind = '<C-c>r1r'
+" syntax highlight
+let g:pymode_syntax = 1
+let g:pymode_syntax_all = 1
+let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+let g:pymode_syntax_space_errors = g:pymode_syntax_all
