@@ -77,6 +77,7 @@ backup_copy() {
     cp -rf $(pwd)/files/zshrc $HOME/.zshrc
     cp -rf $(pwd)/files/gitconfig $HOME/.gitconfig
     cp -rf $(pwd)/files/tmux.conf $HOME/.tmux.conf
+    cp -rf $(pwd)/files/agignore $HOME/.agignore
 
     if [ $os == 'Darwin' ];then
         do_backup .bash_profile

@@ -1,0 +1,8 @@
+.git/
+*.exe
+*.so
+*.dll
+*.zip
+*.tar
+*.tar.gz
+*.pyc)
