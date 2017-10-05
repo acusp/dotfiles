@@ -8,7 +8,7 @@
 #   LastChange: 2017-10-02 10:40:03
 #=============================================================================
 '''
-
+import os
 import sys
 import struct
 import numpy
@@ -105,7 +105,8 @@ def embed(imgFile, payload, password):
             data_img.putpixel((w, h), (r, g, b, a))
             idx = idx + 3
 
-    steg_img.save(imgFile.split('.')[0] + "-stego.png", "PNG")
+    fn, fe = os.path.splitext(imgFile)
+    steg_img.save(fn + "-stego.png", "PNG")
 
     print("[+] %s embedded successfully!" % payload)
 
