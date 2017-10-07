@@ -38,7 +38,7 @@ Plugin 'python-mode/python-mode'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'luochen1990/rainbow'
 Plugin 'mattn/emmet-vim'
-Bundle 'terryma/vim-multiple-cursors'
+Plugin 'terryma/vim-multiple-cursors'
 
 
 " All of your Plugins must be added before the following line
@@ -98,6 +98,7 @@ func! CompileRun()
         :!./%
     endif
 endfunc
+
 
 " themes
 "
@@ -191,6 +192,16 @@ let Tlist_File_Fold_Auto_Close=1
 " [ NERDTree ]
 "
 map <F9> :NERDTreeToggle<CR>
+let NERDTreeWinSize = 30
+let NERDTreeShowBookmarks = 1
+let NERDTreeHighlightCursorline = 1
+let NERDTreeQuitOnOpen = 1
+let g:NERDTreeShowHidden = 1
+let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
+            \ '\.o$', '\.so$', '\.egg$', '^\.git$', '__pycache__', '\.DS_Store' ]
+let NERDTreeShowLineNumbers = 1
+let NERDTreeAutoCenter = 1
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
 " [ A ]
@@ -250,6 +261,13 @@ let g:airline_right_alt_sep = ' '
 let g:airline_symbols.branch = ' '
 let g:airline_symbols.readonly = ' '
 let g:airline_symbols.linenr = ''
+"unicode symbols
+"let g:airline_left_sep = '▶'
+"let g:airline_left_alt_sep = '❯'
+"let g:airline_right_sep = '◀'
+"let g:airline_right_alt_sep = '❮'
+"let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.branch = '⎇'
 
 
 " [ delimitMate ]
@@ -279,7 +297,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
-"关闭syntastic语法检查, 鼠标复制代码时用到, 防止把错误标志给复制了
+" close syntastic checker when copy
 nnoremap <silent> <Leader>ec :SyntasticToggleMode<CR>
 function! ToggleErrors()
     let old_last_winnr = winnr('$')
@@ -312,8 +330,9 @@ let g:pymode_lint_on_fly = 0
 let g:pymode_lint_checkers = ['pyflakes', 'pep8']
 let g:pymode_lint_cwindow = 0
 let g:pymode_lint_signs = 0
-" close run program use python-mode
-let g:pymode_run = 0
+" run program use python-mode
+let g:pymode_run = 1
+let g:pymode_run_bind = '<leader>r'
 " close debuger
 let g:pymode_breakpoint = 0
 "let g:pymode_breakpoint_bind = '<leader>b'
