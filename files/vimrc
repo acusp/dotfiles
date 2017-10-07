@@ -39,6 +39,7 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'luochen1990/rainbow'
 Plugin 'mattn/emmet-vim'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'vimwiki/vimwiki'
 
 
 " All of your Plugins must be added before the following line
@@ -98,6 +99,11 @@ func! CompileRun()
         :!./%
     endif
 endfunc
+
+" auto upload skeleton.c file when create a new .c file
+augroup Skeleton
+    au BufNewFile *.py 0r ~/.vim/skeleton/basic.py
+augroup end
 
 
 " themes

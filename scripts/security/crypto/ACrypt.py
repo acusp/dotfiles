@@ -9,6 +9,7 @@
 #   LastChange: 2017-10-02 18:23:57
 #=============================================================================
 '''
+import sys
 import hashlib
 from Crypto import Random
 from Crypto.Cipher import AES
@@ -44,13 +45,25 @@ class AESCipher:
     def _unpad(s):
         return s[:-ord(s[len(s)-1:])]
 
-if __name__ == '__main__':
-    # encrypt
-    pc = AESCipher('123456')
-    aes_encrypt = pc.encrypt(b"flag{acusp}\n")
+def usage(progName):
+    print("Usage:")
+    print("  %s aes -e|d <message> <password>" % progName)
+    sys.exit()
 
-    # decrypt
-    pc1 = AESCipher('123456')
-    aes_decrypt = pc1.decrypt(aes_encrypt)
+if __name__ == "__main__":
+    if len(sys.argv) < 5:
+        usage(sys.argv[0])
 
-    print(aes_encrypt, aes_decrypt)
+    if (sys.argv[1] == 'aes'):
+        # encrypt
+        pc = AESCipher('123456')
+        aes_encrypt = pc.encrypt(b"flag{acusp}\n")
+
+        # decrypt
+        pc1 = AESCipher('123456')
+        aes_decrypt = pc1.decrypt(aes_encrypt)
+
+        print(aes_encrypt, aes_decrypt)
+    else:
+        print("Sorry, we are not support %s now." % sys.argv[1])
+        sys.exit()

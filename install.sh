@@ -79,6 +79,11 @@ backup_copy() {
     cp -rf $(pwd)/files/tmux.conf $HOME/.tmux.conf
     cp -rf $(pwd)/files/agignore $HOME/.agignore
 
+    if [ ! -d $HOME/.vim/skeleton ]; then
+        mkdir -p $HOME/.vim/skeleton
+    fi
+    cp -rf $(pwd)/skeleton/* $HOME/.vim/skeleton/
+
     if [ $os == 'Darwin' ];then
         do_backup .bash_profile
         cp -rf $(pwd)/files/bashrc $HOME/.bash_profile
