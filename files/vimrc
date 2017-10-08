@@ -40,6 +40,7 @@ Plugin 'luochen1990/rainbow'
 Plugin 'mattn/emmet-vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'vimwiki/vimwiki'
+Plugin 'mzlogin/vim-markdown-toc'
 
 
 " All of your Plugins must be added before the following line
@@ -448,3 +449,8 @@ let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
+
+
+" [vim-markdown-toc]
+"
+let g:vmt_cycle_list_item_markers = 1
