@@ -4,10 +4,11 @@
 import os
 import sys
 
+
 def usage(progName):
-	print("Usage:")
-	print("  %s xxx" % progName)
-	sys.exit()
+    print("Usage:")
+    print("  %s xxx" % progName)
+    sys.exit()
 
 
 if __name__ == '__main__':
