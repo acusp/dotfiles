@@ -76,10 +76,31 @@ set backspace=2
 "1 same as “:set backspace=indent,eol”
 "2 same as “:set backspace=indent,eol,start”
 
-map <Leader>a ggVG
-nnoremap <leader>c :cclose<bar>lclose<cr>
-nnoremap <F2> :set list! list?<CR>
 
+" customize shortcuts
+"
+let mapleader=";"
+map <Leader>a ggVG
+nnoremap <leader>n :bn<CR>
+nnoremap <leader>p :bp<CR>
+nnoremap <leader>q :bd<CR>
+nmap <leader>ct <esc>:retab<cr>
+nnoremap <F2> :set list! list?<CR>
+nnoremap <leader>c :cclose<bar>lclose<cr>
+
+
+" customize commands
+"
+command Todo Ack! 'TODO|FIXME|XXX'
+
+
+" customize autocmd
+"
+autocmd BufWritePre * :StripWhitespace
+
+
+" customize functions
+"
 map <F5> :call CompileRun()<CR>
 func! CompileRun()
     exec "w"
@@ -251,10 +272,6 @@ let g:airline#extensions#tabline#buffer_nr_show = 0
 " whitespace
 let g:airline#extensions#whitespace#enabled = 0
 let g:airline#extensions#whitespace#symbol = '!'
-"
-" switch buffer
-nnoremap <C-n> :bn<CR>
-nnoremap <C-p> :bp<CR>
 "
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
