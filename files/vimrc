@@ -96,7 +96,8 @@ command Todo Ack! 'TODO|FIXME|XXX'
 
 " customize autocmd
 "
-autocmd BufWrite * :StripWhitespace
+autocmd BufEnter * EnableStripWhitespaceOnSave
+autocmd BufWrite *.sh :set ff=unix
 
 
 " customize functions
