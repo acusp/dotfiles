@@ -73,23 +73,23 @@ backup_copy() {
     do_backup .gitconfig
     do_backup .tmux.conf
     do_backup .ycm_extra_conf.py
-    cp -rf $(pwd)/files/vimrc $HOME/.vimrc
-    cp -rf $(pwd)/files/zshrc $HOME/.zshrc
-    cp -rf $(pwd)/files/gitconfig $HOME/.gitconfig
-    cp -rf $(pwd)/files/tmux.conf $HOME/.tmux.conf
-    cp -rf $(pwd)/files/agignore $HOME/.agignore
+    cp -rf $(pwd)/vim/vimrc $HOME/.vimrc
+    cp -rf $(pwd)/configs/zshrc $HOME/.zshrc
+    cp -rf $(pwd)/configs/gitconfig $HOME/.gitconfig
+    cp -rf $(pwd)/configs/tmux.conf $HOME/.tmux.conf
+    cp -rf $(pwd)/configs/agignore $HOME/.agignore
 
     if [ ! -d $HOME/.vim/skeleton ]; then
         mkdir -p $HOME/.vim/skeleton
     fi
-    cp -rf $(pwd)/skeleton/* $HOME/.vim/skeleton/
+    cp -rf $(pwd)/vim/skeleton/* $HOME/.vim/skeleton/
 
     if [ $os == 'Darwin' ];then
         do_backup .bash_profile
-        cp -rf $(pwd)/files/bashrc $HOME/.bash_profile
+        cp -rf $(pwd)/configs/bashrc $HOME/.bash_profile
     elif [ $os == 'Linux' ];then
         do_backup .bashrc
-        cp -rf $(pwd)/files/bashrc $HOME/.bashrc
+        cp -rf $(pwd)/configs/bashrc $HOME/.bashrc
     fi
 
     msg_footer backup_copy
@@ -126,7 +126,7 @@ requirement() {
 vim() {
     msg_header "Install some tools about vim"
 
-    cp -rf $(pwd)/files/ycm_extra_conf.py $HOME/.vim/.ycm_extra_conf.py
+    cp -rf $(pwd)/vim/ycm_extra_conf.py $HOME/.vim/.ycm_extra_conf.py
 
     # Vundle
 	if [ ! -d $HOME/.vim/bundle ];then
@@ -191,14 +191,14 @@ setEnv() {
     if [ ! -d $HOME/bin ]; then
         mkdir $HOME/bin
     fi
-    cp -f $(pwd)/files/emacs_alias.sh $HOME/bin/
+    cp -f $(pwd)/configs/emacs_alias.sh $HOME/bin/
 
     if [ $os == 'Linux' ];then
-        cat $(pwd)/files/env_for_linux >> $HOME/.zshrc
-        cat $(pwd)/files/env_for_linux >> $HOME/.bashrc
+        cat $(pwd)/configs/env_for_linux >> $HOME/.zshrc
+        cat $(pwd)/configs/env_for_linux >> $HOME/.bashrc
     elif [ $os == 'Darwin' ];then
-        cat $(pwd)/files/env_for_mac >> $HOME/.zshrc
-        cat $(pwd)/files/env_for_mac >> $HOME/.bash_profile
+        cat $(pwd)/configs/env_for_mac >> $HOME/.zshrc
+        cat $(pwd)/configs/env_for_mac >> $HOME/.bash_profile
     fi
 
     msg_footer "setEnv"

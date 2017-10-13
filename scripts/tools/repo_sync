@@ -1,4 +1,5 @@
 #!/bin/bash
+
 repo sync
 while [ $? -ne 0 ]
 do
