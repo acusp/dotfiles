@@ -53,7 +53,19 @@ def find(fileName):
         print(i)
 
 
-def tmp(fileName):
+def int2char(fileName):
+    tmp_list = list()
+    with open(fileName, 'r') as f:
+        all_lines = f.readlines()
+        for line in all_lines:
+            tmp_list = line.split("#")
+            print(tmp_list)
+
+    for i in tmp_list:
+        print(chr(int(i)), end="")
+
+
+def temp(fileName):
     with open(fileName, 'r') as f:
         all_lines = f.readlines()
         for line in all_lines:
@@ -64,7 +76,7 @@ def tmp(fileName):
 
 def usage(progName):
     print("Usage:")
-    print("  %s find|replease <FILE>" % progName)
+    print("  %s temp|find|int2char|replease <FILE>" % progName)
     sys.exit()
 
 
@@ -74,5 +86,5 @@ if __name__ == '__main__':
 
     if ("find" == sys.argv[1]):
         find(sys.argv[2])
-    elif ("tmp" == sys.argv[1]):
-        tmp(sys.argv[2])
+    elif ("int2char" == sys.argv[1]):
+        int2char(sys.argv[2])
