@@ -5,27 +5,13 @@ import re
 import os
 import sys
 
-
-def replease():
-    with open(patch_info['file_path'], 'r+') as f:
+def replace(file, old, new):
+    with open(file, 'r+') as f:
         all_lines = f.readlines()
-        for line in all_lines:
-            if 0 == line.strip().find('//'):
-                continue
-            if line.count(patch_info['vul_str']):
-                cmd = "cp {0} {0}.bak".format(
-                    patch_info['file_path'])
-                LgOs.subprocess(cmd)
-                LgLog.info("patch the file: {0}".format(patch_info['file_path']))
-                break
-
-        # replace
         f.seek(0)
         f.truncate()
         for line in all_lines:
-            if 0 != line.strip().find('//'):
-                line = line.replace(patch_info['vul_str'],
-                                    patch_info['patch_str'])
+            line = line.replace(old, new)
             f.write(line)
 
 
