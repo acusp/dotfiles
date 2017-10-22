@@ -24,7 +24,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'mhinz/vim-startify'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'acusp/AuthorInfo'
-"Plugin 'alpertuna/vim-header'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -82,12 +81,15 @@ set backspace=2
 "
 let mapleader=";"
 map <Leader>a ggVG
+nmap <leader>ct <esc>:retab<cr>
+nnoremap <F2> :set list! list?<CR>
 nnoremap <leader>n :bn<CR>
 nnoremap <leader>p :bp<CR>
 nnoremap <leader>q :bd<CR>
-nmap <leader>ct <esc>:retab<cr>
-nnoremap <F2> :set list! list?<CR>
 nnoremap <leader>c :cclose<bar>lclose<cr>
+nnoremap <leader>hh :%!xxd<CR>
+nnoremap <leader>hr :%!xxd<CR>
+nnoremap <leader>sp :StripWhitespace<CR>
 
 
 " customize commands
@@ -97,7 +99,6 @@ command Todo Ack! 'TODO|FIXME|XXX'
 
 " customize autocmd
 "
-autocmd BufEnter * EnableStripWhitespaceOnSave
 autocmd BufWrite *.sh :set ff=unix
 
 
