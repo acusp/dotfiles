@@ -16,27 +16,16 @@ def replace(file, old, new):
 
 
 def find(fileName):
-    pattern = re.compile(r"flag{[^~].*?}")
+    pattern = re.compile(r"flag\{\w*?\}")
 
-    tmp = bytearray()
-    #with open(fileName, 'rb', encoding='utf-8', errors='ignore') as f:
-    with open(fileName, 'rb') as f:
+    #with open(fileName, 'r', encoding='utf-8', errors='replace') as f:
+    with open(fileName, 'r', encoding='Latin1') as f:
         all_lines = f.readlines()
         #print(len(all_lines))
         for line in all_lines:
-            for i in line:
-                if i > 128:
-                    i = 126
-                tmp.append(i)
             #res = re.findall(pattern, line)
-            #print(res)
-
-    #print(str(tmp))
-    #with open("tmp.txt", 'w', encoding='utf-8') as f:
-        #f.write(tmp)
-    res = re.findall(pattern, str(tmp))
-    for i in res:
-        print(i)
+            res = list(filter(lambda s: bytes(s[1:-1], 'utf-8').isalnum(), line.split('flag')))
+            print(res)
 
 
 def int2char(fileName):
