@@ -32,7 +32,7 @@ Plugin 'iamcco/markdown-preview.vim'
 Plugin 'rking/ag.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'vim-syntastic/syntastic'
+"Plugin 'vim-syntastic/syntastic'
 Plugin 'python-mode/python-mode'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'luochen1990/rainbow'
@@ -312,28 +312,28 @@ let g:mkdp_path_to_chrome = "google-chrome"
 
 " [ Syntastic ]
 "
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_loc_list_height = 3
-let g:syntastic_auto_jump = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
-" close syntastic checker when copy
-nnoremap <silent> <Leader>ec :SyntasticToggleMode<CR>
-function! ToggleErrors()
-    let old_last_winnr = winnr('$')
-    lclose
-    if old_last_winnr == winnr('$')
-        " Nothing was closed, open syntastic error location panel
-        Errors
-    endif
-endfunction
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_loc_list_height = 3
+"let g:syntastic_auto_jump = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_cpp_compiler = 'clang++'
+"let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+"" close syntastic checker when copy
+"nnoremap <silent> <Leader>ec :SyntasticToggleMode<CR>
+"function! ToggleErrors()
+    "let old_last_winnr = winnr('$')
+    "lclose
+    "if old_last_winnr == winnr('$')
+        "" Nothing was closed, open syntastic error location panel
+        "Errors
+    "endif
+"endfunction
 
 
 " [ python-mode ]
