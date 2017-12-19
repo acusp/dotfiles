@@ -41,6 +41,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'vimwiki/vimwiki'
 Plugin 'mzlogin/vim-markdown-toc'
 Plugin 'dhruvasagar/vim-table-mode'
+Plugin 'vim-scripts/DrawIt'
 
 
 " All of your Plugins must be added before the following line
