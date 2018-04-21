@@ -3,6 +3,8 @@
 # ----------------------------------------
 if [ $(uname) == "Linux" ]; then
     alias ls="ls --color=auto"
+    alias navi="google-chrome --app=https://navi.acusp.info"
+    alias wechat="google-chrome --app=http://wx.qq.com"
 elif [ $(uname) == "Darwin" ]; then
     alias ls="ls -G"
 fi

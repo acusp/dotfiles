@@ -81,6 +81,13 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+if [[ $(uname) == "Linux" ]]; then
+    alias ls="ls --color=auto"
+    alias navi="google-chrome --app=https://navi.acusp.info"
+    alias wechat="google-chrome --app=http://wx.qq.com"
+elif [[ $(uname) == "Darwin" ]]; then
+    alias ls="ls -G"
+fi
 
 alias .='source'
 alias c='clear'
