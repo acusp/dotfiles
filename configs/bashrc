@@ -21,6 +21,7 @@ alias rm="trash-put"
 alias screenfetch="screenfetch -E"
 alias emacs="$HOME/bin/emacs_alias.sh"
 alias pyc="python -c"
+alias brevent="adb -d shell sh /data/data/me.piebridge.brevent/brevent.sh"
 
 
 # ----------------------------------------
