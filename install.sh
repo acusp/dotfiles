@@ -113,7 +113,7 @@ requirement() {
         	sudo apt-get remove -y vim-common
         	sudo add-apt-repository -y ppa:hzwhuang/ss-qt5
         	sudo apt update
-        	sudo apt-get install -y vim vim-gtk git wget curl build-essential cmake python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip ppa-purge proxychains trash-cli ranger shadowsocks-qt5 screenfecth
+        	sudo apt-get install -y vim vim-gtk git wget curl build-essential cmake python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip ppa-purge proxychains ranger shadowsocks-qt5 screenfecth
 		else
 			bad_echo "[-] Sorry, please install some packages by yourself!"
 		fi
