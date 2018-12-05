@@ -17,7 +17,7 @@ alias ll="ls -lha"
 alias vi='vim'
 alias javac="javac -J-Dfile.encoding=utf8"
 alias grep="grep --color=auto"
-alias rm="trash-put"
+alias rm='echo "This is not the command you are looking for."; false'
 alias screenfetch="screenfetch -E"
 alias emacs="$HOME/bin/emacs_alias.sh"
 alias pyc="python -c"
