@@ -53,6 +53,7 @@ install() {
             brew install $1
         elif [ $os == 'Linux' ];then
             if which apt-get >/dev/null; then
+                sudo apt-get update
                 sudo apt-get install -y $1
             else
                 bad_echo "[-] Sorry, please install $1 by yourself!"
@@ -105,7 +106,7 @@ requirement() {
 	    	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	    fi
         brew install vim --with-python3
-        brew install git wget proxychains-ng cmake ranger screenfetch
+        brew install git gitk wget proxychains-ng cmake ranger screenfetch the_silver_searcher
 		bad_echo "[-] Please download shadowsocks client on https://github.com/shadowsocks/shadowsocks-iOS/releases/"
 
     elif [ $os == 'Linux' ];then
@@ -113,10 +114,10 @@ requirement() {
         	sudo apt-get remove -y vim-common
         	sudo apt update
         	sudo apt-get install -y vim vim-gtk
-		sudo apt-get install -y git wget curl
-		sudo apt-get install -y build-essential cmake
-		sudo apt-get install -y python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip ppa-purge
-		sudo apt-get install -y proxychains ranger screenfetch
+            sudo apt-get install -y git gitk wget curl
+            sudo apt-get install -y build-essential cmake
+            sudo apt-get install -y python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip ppa-purge
+            sudo apt-get install -y tree proxychains ranger screenfetch silversearcher-ag
 		else
 			bad_echo "[-] Sorry, please install some packages by yourself!"
 		fi
@@ -178,6 +179,21 @@ tmux() {
     msg_footer tmux
 }
 
+web() {
+    msg_header "Install some tools about web"
+
+    # yarn
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+    install yarn
+
+    # nodejs & npm
+    curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+    install nodejs
+
+    msg_footer web
+}
+
 spacemacs() {
     mv $HOME/.emacs.d $HOME/.emacs.d.bak
     mv $HOME/.emacs $HOME/.emacs.bak
@@ -217,6 +233,10 @@ main() {
         vim
         zsh
         tmux
+        web
+    fi
+    if [ "$option" == "web" ]; then
+        web
     fi
 
     nice_echo "[+] Install Success !"
@@ -230,7 +250,7 @@ main() {
 
 if [ $# != 1 ]; then
     echo "Usage:"
-    echo "./install init|update"
+    echo "./install init|config|web"
     exit -1
 fi
 main $1

@@ -9,3 +9,11 @@ git clone git@github.com:acusp/dotfiles.git
 cd dotfiles
 ./install.sh
 ```
+
+vim plugin install:
+
+```
+vim
+
+:PluginInstall 
+```
