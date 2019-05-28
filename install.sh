@@ -182,20 +182,19 @@ tmux() {
 web() {
     msg_header "Install some tools about web"
 
-    if [ $os == 'Linux' ];then
+    if [ $os == 'Darwin' ];then
+        # yarn
+        curl -o- -L https://yarnpkg.com/install.sh | bash
+    elif [ $os == 'Linux' ];then
         # yarn
         curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
         echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+        sudo apt-get update && sudo apt-get install yarn
 
         # nodejs & npm
         curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+        sudo apt-get update && sudo apt-get install nodejs
     fi
-
-    # yarn
-    install yarn
-
-    # nodejs & npm
-    install nodejs
 
     msg_footer web
 }
