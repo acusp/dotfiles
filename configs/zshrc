@@ -97,6 +97,7 @@ alias vi='vim'
 alias javac="javac -J-Dfile.encoding=utf8"
 alias grep="grep --color=auto"
 alias rm='echo "This is not the command you are looking for."; false'
+alias tp="trash-put"
 alias screenfetch="screenfetch -E"
 alias emacs="$HOME/bin/emacs_alias.sh"
 alias pyc="python -c"
@@ -112,6 +113,9 @@ alias -s xz="xz -d"
 alias -s tar="tar -xvf"
 alias -s jar="java -jar"
 alias brevent="adb -d shell sh /data/data/me.piebridge.brevent/brevent.sh"
+alias www="python3 -m http.server 6666"
+alias ipe="curl ipinfo.io/ip"
+alias sshkey="ssh-keygen -t rsa -C"
 
 
 # ----------------------------------------
