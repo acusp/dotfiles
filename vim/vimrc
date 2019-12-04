@@ -24,7 +24,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'mhinz/vim-startify'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'acusp/AuthorInfo'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Raimondi/delimitMate'
@@ -245,25 +245,25 @@ nnoremap <silent> <F12> :A<CR>
 
 " [ YouCompleteMe ]
 "
-let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
-let g:ycm_confirm_extra_conf=0
-let g:ycm_min_num_of_chars_for_completion=2
-let g:ycm_cache_omnifunc=0
-let g:ycm_seed_identifiers_with_syntax=1
-let g:ycm_complete_in_comments = 1
-let g:ycm_complete_in_strings = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 0
+"let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
+"let g:ycm_confirm_extra_conf=0
+"let g:ycm_min_num_of_chars_for_completion=2
+"let g:ycm_cache_omnifunc=0
+"let g:ycm_seed_identifiers_with_syntax=1
+"let g:ycm_complete_in_comments = 1
+"let g:ycm_complete_in_strings = 1
+"let g:ycm_collect_identifiers_from_tags_files = 1
+"let g:ycm_collect_identifiers_from_comments_and_strings = 0
 "
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_auto_trigger=0
+"let g:ycm_show_diagnostics_ui = 0
+"let g:ycm_auto_trigger=0
 "
 " \y - turn off YCM; \Y - turn on YCM
-nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>
-nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>
+"nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>
+"nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>
 "
 " python
-let g:ycm_python_binary_path = 'python3'
+"let g:ycm_python_binary_path = 'python3'
 
 
 " [ vim-airline ]
