@@ -60,3 +60,6 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 if test -t 1; then
     exec zsh
 fi
+
+# yarn global bin
+export PATH="$(yarn global bin):$PATH"
