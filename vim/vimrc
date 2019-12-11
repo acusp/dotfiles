@@ -42,6 +42,7 @@ Plugin 'vimwiki/vimwiki'
 Plugin 'mzlogin/vim-markdown-toc'
 Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'vim-scripts/DrawIt'
+Plugin 'easymotion/vim-easymotion'
 
 
 " All of your Plugins must be added before the following line
