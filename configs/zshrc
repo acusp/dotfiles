@@ -116,6 +116,7 @@ alias brevent="adb -d shell sh /data/data/me.piebridge.brevent/brevent.sh"
 alias www="python3 -m http.server 5000"
 alias ipe="curl ipinfo.io/ip"
 alias sshkey="ssh-keygen -t rsa -C"
+alias wttr="curl wttr"
 
 
 # ----------------------------------------
