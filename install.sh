@@ -106,7 +106,7 @@ requirement() {
 	    	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	    fi
         brew install vim --with-python3
-        brew install git wget proxychains-ng cmake ranger screenfetch the_silver_searcher
+        brew install git git-gui wget proxychains-ng cmake ranger screenfetch the_silver_searcher
 		bad_echo "[-] Please download shadowsocks client on https://github.com/shadowsocks/shadowsocks-iOS/releases/"
 
     elif [ $os == 'Linux' ];then
