@@ -117,6 +117,7 @@ alias www="python3 -m http.server 5000"
 alias ipe="curl ipinfo.io/ip"
 alias sshkey="ssh-keygen -t rsa -C"
 alias wttr="curl wttr"
+alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -"
 
 
 # ----------------------------------------
