@@ -83,8 +83,6 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 if [[ $(uname) == "Linux" ]]; then
     alias ls="ls --color=auto"
-    alias navi="google-chrome --app=https://navi.acusp.info"
-    alias wechat="google-chrome --app=http://wx.qq.com"
 elif [[ $(uname) == "Darwin" ]]; then
     alias ls="ls -G"
 fi
@@ -96,10 +94,10 @@ alias la='ls -a'
 alias vi='vim'
 alias javac="javac -J-Dfile.encoding=utf8"
 alias grep="grep --color=auto"
-alias rm='echo "This is not the command you are looking for."; false'
-alias tp="trash-put"
+#alias rm='echo "This is not the command you are looking for."; false'
+#alias tp="trash-put"
 alias screenfetch="screenfetch -E"
-alias emacs="$HOME/bin/emacs_alias.sh"
+#alias emacs="$HOME/bin/emacs_alias.sh"
 alias pyc="python -c"
 
 alias -s c=vi

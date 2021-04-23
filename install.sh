@@ -22,7 +22,7 @@ msg_footer() {
     echo "#"
 }
 
-do_backup() {
+backup() {
     backup=$HOME/backup/dotfiles
     if [ ! -d $backup ]; then
         mkdir -p $backup
@@ -32,6 +32,10 @@ do_backup() {
         now=`date +%Y%m%d_%s`
         [ ! -L "$HOME/$1" ] && cp -fpR "$HOME/$1" "$backup/$1.$now";
     fi
+}
+
+append() {
+    cat $1 >> $2
 }
 
 isExist() {
@@ -69,29 +73,29 @@ install() {
 backup_copy() {
     msg_header "Update config files"
 
-    do_backup .vimrc
-    do_backup .zshrc
-    do_backup .gitconfig
-    do_backup .tmux.conf
-    do_backup .ycm_extra_conf.py
-    cp -rf $(pwd)/vim/vimrc $HOME/.vimrc
-    cp -rf $(pwd)/configs/zshrc $HOME/.zshrc
+    backup .vimrc
+    backup .zshrc
+    backup .gitconfig
+    backup .tmux.conf
+    backup .ycm_extra_conf.py
+    cp -rf $(pwd)/vim/basic.vimrc $HOME/.vimrc
+    #cp -rf $(pwd)/configs/zshrc $HOME/.zshrc
     cp -rf $(pwd)/configs/gitconfig $HOME/.gitconfig
     cp -rf $(pwd)/configs/tmux.conf $HOME/.tmux.conf
     cp -rf $(pwd)/configs/agignore $HOME/.agignore
+
+    if [ $os == 'Linux' ];then
+        backup .bashrc
+        cp -rf $(pwd)/configs/bashrc $HOME/.bashrc
+    elif [ $os == 'Darwin' ];then
+        backup .bash_profile
+        cp -rf $(pwd)/configs/bashrc $HOME/.bash_profile
+    fi
 
     if [ ! -d $HOME/.vim/skeleton ]; then
         mkdir -p $HOME/.vim/skeleton
     fi
     cp -rf $(pwd)/vim/skeleton/* $HOME/.vim/skeleton/
-
-    if [ $os == 'Darwin' ];then
-        do_backup .bash_profile
-        cp -rf $(pwd)/configs/bashrc $HOME/.bash_profile
-    elif [ $os == 'Linux' ];then
-        do_backup .bashrc
-        cp -rf $(pwd)/configs/bashrc $HOME/.bashrc
-    fi
 
     msg_footer backup_copy
 }
@@ -111,7 +115,7 @@ requirement() {
 		if which apt-get >/dev/null; then
         	sudo apt-get remove -y vim-common
         	sudo apt update
-        	sudo apt-get install -y vim vim-gtk
+        	sudo apt-get install -y vim
             sudo apt-get install -y git gitk wget curl
             sudo apt-get install -y build-essential cmake
             sudo apt-get install -y python-dev python3-dev python-setuptools python3-setuptools python-pip python3-pip ppa-purge
@@ -154,13 +158,7 @@ zsh() {
     msg_header "Install some tools about zsh"
 
     # oh-my-zsh
-	if [ ! -d $HOME/.oh-my-zsh ];then
-        nice_echo "[+] Downloading oh-my-zsh..."
-        git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-    fi
-
-    # zsh
-    install zsh
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
     # autojump
     install autojump
@@ -187,11 +185,11 @@ web() {
         # yarn
         curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
         echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-        sudo apt-get update && sudo apt-get install yarn
+        sudo apt update && sudo apt install --no-install-recommends yarn
 
-        # nodejs & npm
-        curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-        sudo apt-get update && sudo apt-get install nodejs
+        # nvm & nodejs
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+        bad_echo "[-] Please manual install nodejs use: nvm install --lts!"
     fi
 
     msg_footer web
@@ -215,11 +213,11 @@ setEnv() {
     cp -f $(pwd)/configs/emacs_alias.sh $HOME/bin/
 
     if [ $os == 'Linux' ];then
-        cat $(pwd)/configs/env_for_linux >> $HOME/.zshrc
-        cat $(pwd)/configs/env_for_linux >> $HOME/.bashrc
+        #append $(pwd)/configs/env_for_linux >> $HOME/.zshrc
+        append $(pwd)/configs/env_for_linux $HOME/.bashrc
     elif [ $os == 'Darwin' ];then
-        cat $(pwd)/configs/env_for_mac >> $HOME/.zshrc
-        cat $(pwd)/configs/env_for_mac >> $HOME/.bash_profile
+        #append $(pwd)/configs/env_for_mac $HOME/.zshrc
+        append $(pwd)/configs/env_for_mac $HOME/.bash_profile
     fi
 
     msg_footer "setEnv"
@@ -236,7 +234,7 @@ main() {
         vim
         zsh
         tmux
-        web
+        #web
     fi
     if [ "$option" == "web" ]; then
         web
